@@ -10,7 +10,6 @@ export function loginValidator(
   Object.keys(data).forEach((key: string) => {
     fieldError[key] = [];
     if (key in rules) {
-      console.log(fieldError[key]);
       if (rules[key].required && validator.isEmpty(data[key])) {
         fieldError[key].push(`${key} can't be empty.`);
       }

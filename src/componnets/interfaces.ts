@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export namespace intercafes {
   export type LoginStateType = {
     data: {
@@ -14,5 +16,9 @@ export namespace intercafes {
 
   export type IErrors = {
     [key: string]: string[];
+  };
+
+  export type linkDispatchPropsLogin = {
+    fetchUser: (data: { [key: string]: string }, url: string) => Promise<void>;
   };
 }
