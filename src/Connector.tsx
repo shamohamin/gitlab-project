@@ -6,7 +6,7 @@ import {
   Redirect,
   RouteComponentProps,
 } from "react-router-dom";
-import { LoginWrapper } from "./componnets/LoginWrapper";
+import LoginWrapper from "./componnets/LoginWrapper";
 
 type RouteSection = {
   section: string;
@@ -14,7 +14,6 @@ type RouteSection = {
 
 class Connector extends React.Component<{}, {}> {
   private chooseComponent(routeProps: RouteComponentProps<RouteSection>) {
-    console.log(routeProps);
     if (routeProps.match.params.section) {
       switch (routeProps.match.params.section) {
         case "login":
@@ -34,10 +33,7 @@ class Connector extends React.Component<{}, {}> {
           {}
           <Route
             path="/:section?"
-            render={(routeProps) => {
-              console.log(routeProps);
-              return this.chooseComponent(routeProps);
-            }}
+            render={(routeProps) => this.chooseComponent(routeProps)}
           />
           <Redirect to="/login" />
         </Switch>
