@@ -5,12 +5,17 @@ import { Login } from "../views/Login";
 import { intercafes } from "./interfaces";
 //validator
 import { loginValidator } from "./validators";
+// redux
+import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../lib/actions/ActionTypes";
+import { fetchUser } from "../lib/actions/userAction";
 
-export class LoginWrapper extends React.Component<
-  {},
+class LoginWrapper extends React.Component<
+  intercafes.linkDispatchPropsLogin,
   intercafes.LoginStateType
 > {
-  constructor(props: Readonly<{}>) {
+  constructor(props: Readonly<intercafes.linkDispatchPropsLogin>) {
     super(props);
     this.state = {
       data: {
@@ -48,6 +53,7 @@ export class LoginWrapper extends React.Component<
   ) => {
     ev.preventDefault();
     if (this.validate()) {
+      await this.props.fetchUser({ ...this.state.data }, "ss");
       console.log("submited");
     }
   };
@@ -76,7 +82,6 @@ export class LoginWrapper extends React.Component<
   };
 
   render() {
-    console.log(this.state);
     return (
       <>
         <Login
@@ -89,3 +94,10 @@ export class LoginWrapper extends React.Component<
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>) => ({
+  fetchUser: (data: { [key: string]: string }, url: string) =>
+    dispatch(fetchUser(data, url)),
+});
+
+export default connect(() => ({}), mapDispatchToProps)(LoginWrapper);
