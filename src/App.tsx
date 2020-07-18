@@ -1,11 +1,11 @@
 import React from "react";
-import { Login } from "./componnets/Login";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Connector from "./Connector";
 
 function App() {
   return (
     <div>
-      <Login />
+      <Connector />
     </div>
   );
 }
