@@ -18,6 +18,10 @@ export namespace intercafes {
     [key: string]: string[];
   };
 
+  export type MainNavbarWrapperTypes = {
+    routes: string[];
+  };
+
   export type linkDispatchPropsLogin = {
     fetchUser: (data: { [key: string]: string }, url: string) => Promise<void>;
   };
