@@ -1,0 +1,136 @@
+.main-navbar {
+  min-width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.main-navbar * {
+  box-sizing: border-box;
+}
+
+.main-navbar::before {
+  width: 100%;
+}
+
+.main-navbar::after {
+  width: 100%;
+}
+
+.main-navbar .navbar {
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: left;
+  position: relative;
+  padding: 1px;
+  background-color: #212529;
+}
+
+.main-navbar .navbar .navbar-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 0px;
+  padding: 5px;
+}
+
+.main-navbar .navbar .navbar-brand {
+  color: white;
+  padding: 0px;
+  padding-left: 20px;
+  padding-bottom: 7px;
+  font-size: 2rem;
+}
+
+.main-navbar .navbar .navbar-links .nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-right: 20px;
+  border-radius: 10px;
+  color: #ffffff80;
+  padding: 20px;
+}
+
+.main-navbar .nav-item a {
+  color: #ffffff80;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.main-navbar .nav-item a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.main-navbar .nav-item:last-child {
+  border: none;
+}
+
+.main-navbar div:nth-of-type(1) {
+  padding-left: 150px;
+}
+
+.main-navbar .navbar .slide-button {
+  border: 1px solid #ffffff80;
+  position: absolute;
+  width: 35px;
+  height: 25px;
+  color: #ffffff80;
+  top: 20px;
+  right: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .main-navbar .navbar {
+    min-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .main-navbar .navbar .navbar-links {
+    display: none;
+  }
+
+  .main-navbar .navbar .navbar-links .nav-item {
+    display: block;
+    width: 100%;
+    margin: 0px;
+    padding: 10px;
+    padding-left: 20px;
+    background-color: #212529;
+    border: none;
+    border-radius: 0px;
+  }
+
+  .main-navbar .navbar .navbar-links .nav-item:first-child {
+    padding-top: 0px;
+  }
+
+  .main-navbar .navbar .slide-button {
+    display: flex;
+  }
+
+  .main-navbar .navbar .navbar-brand {
+    display: block;
+    text-align: left;
+    align-self: flex-start;
+    padding: 20px;
+    padding-top: 8px;
+  }
+}
