@@ -8,6 +8,10 @@ export declare namespace interfaces {
     errors: IErrors;
   };
 
+  export type MainNavbarTypes = {
+    routes: string[];
+  };
+
   export type IErrors = {
     [key: string]: string[];
   };
