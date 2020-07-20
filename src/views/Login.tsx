@@ -56,14 +56,10 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
             <div style={divStyle}>
               {Object.keys(errors).map((key: string) =>
                 errors[key].map((item) => (
-                  <>
-                    <div style={{ margin: "5px" }}>
-                      <span style={errorSpanStyle}>Error</span>
-                      <span key={item} style={spanStyle}>
-                        {item}
-                      </span>
-                    </div>
-                  </>
+                  <div key={key} style={{ margin: "5px" }}>
+                    <span style={errorSpanStyle}>Error</span>
+                    <span style={spanStyle}>{item}</span>
+                  </div>
                 ))
               )}
             </div>
@@ -77,6 +73,7 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
               value={values.username}
               onChange={onChange}
               autoComplete="off"
+              autoFocus={true}
             />
             <span className="fa fa-envelope fa-lg"></span>
           </div>
