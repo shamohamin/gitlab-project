@@ -5,10 +5,12 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { Template } from "./componnets/Template";
-import LoginWrapper from "./componnets/LoginWrapper";
+// components
+import { Template } from "./components/Template";
+import LoginWrapper from "./components/LoginWrapper";
+import { SignUpWrapper } from "./components/SingUpWrapper";
 // routes array
-export const routes = ["Home", "Login", "Register", "Dashboard"];
+export const routes = ["Home", "Login", "sign_up", "Dashboard"];
 
 export const Routes: React.FC = () => {
   const Wrapper = (Content: any, props?: any) => (
@@ -29,15 +31,7 @@ export const Routes: React.FC = () => {
             </Template>
           )}
         />
-        <Route
-          path="/register"
-          component={() => (
-            <Template>
-              {" "}
-              <div>register</div>{" "}
-            </Template>
-          )}
-        />
+        <Route path="/sign_up" component={() => Wrapper(SignUpWrapper)} />
         <Route
           path="/dashboard"
           component={() => (
