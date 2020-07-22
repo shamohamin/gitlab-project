@@ -3,24 +3,25 @@ import "../style/login.css";
 import GoogleLogin from "react-google-login";
 //interfaces
 import { interfaces } from "./interfaces";
+import { useHistory } from "react-router-dom";
 
-const spanStyle: React.CSSProperties = {
+export const spanStyle: React.CSSProperties = {
   fontSize: "14px",
   color: "#ff0000",
   display: "inlineBlock",
   width: "80%",
-  padding: "3px",
   paddingLeft: "10px",
 };
 
 const divStyle: React.CSSProperties = {
   width: "100%",
   display: "block",
-  paddingBottom: "10px",
-  marginBottom: "10px",
+  marginTop: "5px",
+  paddingBottom: "0px",
+  marginBottom: "0px",
 };
 
-const errorSpanStyle: React.CSSProperties = {
+export const errorSpanStyle: React.CSSProperties = {
   backgroundColor: "red",
   fontSize: "12px",
   fontWeight: "bold",
@@ -31,67 +32,80 @@ const errorSpanStyle: React.CSSProperties = {
   textAlign: "center",
 };
 
+export enum Shapes {
+  email = "fa fa-envelope fa-lg",
+  first_name = "fa fa-user fa-lg",
+  last_name = "fa fa-id-card fa-lg",
+  password = "fa fa-key fa-lg",
+}
+
 export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
   onChange,
   values,
   onSubmit,
   errors,
+  isDirty,
+  name,
 }) => {
-  const _errorsRender = (errs: interfaces.IErrors): boolean => {
-    let valid: boolean = true;
-    Object.keys(errs).forEach((key) => {
-      if (errors[key].length > 0) {
-        valid = false;
-      }
-    });
-    return valid;
-  };
+  const history = useHistory();
 
+  const inputs: interfaces.InputProps[] = Object.keys(values).map(
+    (key: string) => {
+      return {
+        name: key,
+        value: values[key],
+        onChange: onChange,
+        autoFocus: key === "first_name" || key === "user_name" ? true : false,
+        type: key === "password" ? "password" : "text",
+        shapeClassname:
+          Shapes[(key as unknown) as keyof typeof Shapes] || Shapes.email,
+      };
+    }
+  );
+
+  const inputGenerator = (inputs: interfaces.InputProps[]): JSX.Element[] =>
+    inputs.map(
+      ({
+        value = "",
+        name,
+        onChange,
+        type,
+        shapeClassname,
+        autoFocus,
+      }: interfaces.InputProps) => (
+        <div key={name} className="input-wrap">
+          <input
+            name={name}
+            value={value}
+            onChange={onChange}
+            type={type}
+            autoComplete="off"
+            autoFocus={autoFocus}
+            placeholder={name?.split("_").join(" ")}
+          />
+          {isDirty !== undefined
+            ? isDirty[name || ""] === true
+              ? errors[name || ""].map((err: string) => (
+                  <div style={divStyle} key={err}>
+                    <span style={errorSpanStyle}>Error</span>
+                    <span style={spanStyle}>{err}</span>
+                  </div>
+                ))
+              : null
+            : null}
+          <span className={shapeClassname}></span>
+        </div>
+      )
+    );
   return (
     <div className="login-component">
       <div className="login-container p-r-50 p-l-50 p-t-77 p-b-30">
         <form className="login-form" method="post" onSubmit={onSubmit}>
-          <h1>LOGIN</h1>
-          {!_errorsRender(errors) ? (
-            <div style={divStyle}>
-              {Object.keys(errors).map((key: string) =>
-                errors[key].map((item) => (
-                  <div key={key} style={{ margin: "5px" }}>
-                    <span style={errorSpanStyle}>Error</span>
-                    <span style={spanStyle}>{item}</span>
-                  </div>
-                ))
-              )}
-            </div>
-          ) : null}
-          <div className="input-wrap">
-            {" "}
-            <input
-              type="text"
-              placeholder="username"
-              name="username"
-              value={values.username}
-              onChange={onChange}
-              autoComplete="off"
-              autoFocus={true}
-            />
-            <span className="fa fa-envelope fa-lg"></span>
-          </div>
-          <div className="input-wrap">
-            {" "}
-            <input
-              type="password"
-              placeholder="password"
-              name="password"
-              onChange={onChange}
-              value={values.password}
-              autoComplete="on"
-            />{" "}
-            <span className="fa fa-key"></span>
-          </div>
+          <h1>{name}</h1>
+          {inputGenerator(inputs)}
           <div className="form-btn">
             {" "}
-            <button type="submit"> LOGIN </button>{" "}
+            <button type="submit"> {name.toUpperCase()} </button>{" "}
           </div>
 
           <div className="text-center">
@@ -101,7 +115,11 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
             <GoogleLogin clientId="" buttonText="Google" />
           </div>
           <div className="text-center">
-            <span>Not a member?</span>
+            {name.toLowerCase() === "login" ? (
+              <span>Not a member?</span>
+            ) : (
+              <span> member? </span>
+            )}
             <span
               id="link"
               style={{
@@ -111,9 +129,14 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
                 lineHeight: "1.4",
                 color: "#999999",
               }}
+              onClick={() =>
+                history.push(
+                  name.toLowerCase() === "login" ? "/sign_up" : "/login"
+                )
+              }
             >
               {" "}
-              sign up now
+              {name.toLowerCase() === "login" ? "sign up now" : "sign in now"}
             </span>
           </div>
         </form>
