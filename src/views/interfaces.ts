@@ -1,4 +1,4 @@
-export declare namespace interfaces {
+export declare module interfaces {
   export type LoginPropsType = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     values: {
@@ -6,6 +6,10 @@ export declare namespace interfaces {
     };
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
     errors: IErrors;
+    isDirty?: {
+      [key: string]: boolean | undefined;
+    };
+    name: string;
   };
 
   export type MainNavbarTypes = {
@@ -14,5 +18,15 @@ export declare namespace interfaces {
 
   export type IErrors = {
     [key: string]: string[];
+  };
+
+  export type InputProps = {
+    type: string;
+    name?: string;
+    value?: string;
+    autoFocus?: boolean;
+    onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+    classname?: string;
+    shapeClassname?: string;
   };
 }
