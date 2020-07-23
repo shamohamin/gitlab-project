@@ -16,14 +16,15 @@ build:
   stage: build
   before_script:
     - export PATH=$HOME/.yarn/bin:$PATH
-    - yarn -v
-    - yarn config set cache-folder .yarn
-    - yarn install
+    - npm -v
+    # - yarn -v
+    # - yarn config set cache-folder .yarn
+    # - yarn install
   script:
     - echo "building from src"
-    - yarn -v
-    - yarn install
-    - yarn run build
+    # - yarn -v
+    - npm install
+    - npm run build
   artifacts:
     paths: 
       - ./dist
