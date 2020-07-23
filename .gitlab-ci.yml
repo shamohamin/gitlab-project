@@ -1,0 +1,13 @@
+images: node latest
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "building from src"
+    - yarn -v
+    - yarn install
+    - yarn run build
