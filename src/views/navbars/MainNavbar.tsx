@@ -63,7 +63,7 @@ export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
           className="slide-button fa fa-bars fa-1x"
           onClick={() => $(".navbar-links").not(".nav-item").toggle("slow")}
         ></span>
-        <div className={`navbar-brand`}>Navbar</div>
+        <div className={`navbar-brand`}>KNTU</div>
         <div className={`navbar-links`}>
           {routes.map((route: string) =>
             linkGenerator(`/${route}`, route, "nav-item")
