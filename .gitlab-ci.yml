@@ -3,17 +3,20 @@ image: node:latest
 cache:
   paths:
     - node_modules/
+    - .yarn
 
 stages:
   - build
   - deploy
 
 before_script:
-    - apt-get install yarn
-    - echo "yarn instaled successfully."
+    - apt-get update -qq && apt-get install
+    - echo "packages instaled successfully."
 
 build:
   stage: build
+  before_script:
+    - yarn config set cache-folder .yarn
   script:
     - echo "building from src"
     - yarn -v
