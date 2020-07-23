@@ -8,7 +8,7 @@ stages:
   - build
   - deploy
 
-before-script:
+before_script:
     - sudo apt install yarn
 
 build:
