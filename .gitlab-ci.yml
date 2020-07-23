@@ -1,4 +1,4 @@
-images: node latest
+image: node latest
 
 stages:
   - build
