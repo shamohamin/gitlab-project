@@ -1,14 +1,10 @@
 import React from "react";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 // components
 import { Template } from "./components/Template";
 import LoginWrapper from "./components/LoginWrapper";
 import { SignUpWrapper } from "./components/SingUpWrapper";
+import { NotFound } from "./components/404";
 // routes array
 export const routes = ["Home", "Login", "sign_up", "Dashboard"];
 
@@ -41,7 +37,7 @@ export const Routes: React.FC = () => {
             </Template>
           )}
         />
-        <Redirect to="/login" />
+        <Route component={() => Wrapper(NotFound)} />
       </Switch>
     </Router>
   );
