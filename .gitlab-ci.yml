@@ -3,7 +3,6 @@ image: node:9.4.0
 cache:
   paths:
     - node_modules/
-    - .yarn
 
 stages:
   - build
@@ -15,16 +14,12 @@ before_script:
 build:
   stage: build
   before_script:
-    - export PATH=$HOME/.yarn/bin:$PATH
     - npm -v
-    # - yarn -v
-    # - yarn config set cache-folder .yarn
-    # - yarn install
+    - npm install
   script:
     - echo "building from src"
-    # - yarn -v
-    - npm install
     - npm run build
+    - echo "building successfull"
   artifacts:
     paths: 
-      - ./dist
+      - ./build
