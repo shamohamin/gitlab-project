@@ -10,14 +10,14 @@ stages:
   - deploy
 
 before_script:
+    - apt-get update -qq && apt-get install -qy libelf1
     - echo "packages instaled successfully."
 
 build:
   stage: build
   before_script:
-    - sudo apt-get update -qq && apt-get install
-    - export PATH=$HOME/.yarn/bin:$PATH
     - yarn config set cache-folder .yarn
+    - yarn install
     - export PATH=$HOME/.yarn/bin:$PATH
   script:
     - echo "building from src"
