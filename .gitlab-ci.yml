@@ -20,5 +20,5 @@ build:
     - yarn install
     - yarn run build
   artifacts:
-    path: 
+    paths: 
       - ./dist
