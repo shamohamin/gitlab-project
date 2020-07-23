@@ -9,11 +9,11 @@ stages:
   - deploy
 
 before_script:
-    - sudo apt install yarn
+    - sudo apt-get install yarn
+    - echo "yarn instaled successfully."
 
 build:
   stage: build
-  
   script:
     - echo "building from src"
     - yarn -v
