@@ -18,7 +18,6 @@ build:
   stage: build
   before_script:
     - export PATH=$HOME/.yarn/bin:$PATH
-    - yarn global add node-gyp
     - yarn config set cache-folder .yarn
   script:
     - echo "building from src"
