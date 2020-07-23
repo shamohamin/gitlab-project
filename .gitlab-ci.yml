@@ -6,6 +6,8 @@ stages:
 
 build:
   stage: build
+  before-script:
+    - sudo apt install yarn
   script:
     - echo "building from src"
     - yarn -v
