@@ -15,7 +15,7 @@ before_script:
 build:
   stage: build
   before_script:
-    - apt-get update -qq && apt-get install
+    - sudo apt-get update -qq && apt-get install
     - export PATH=$HOME/.yarn/bin:$PATH
     - yarn config set cache-folder .yarn
     - export PATH=$HOME/.yarn/bin:$PATH
