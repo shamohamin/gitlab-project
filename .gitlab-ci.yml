@@ -8,14 +8,17 @@ stages:
   - build
   - deploy
 
+before-script:
+    - sudo apt install yarn
+
 build:
   stage: build
-  before-script:
-    - sudo apt install yarn
+  
   script:
     - echo "building from src"
     - yarn -v
     - yarn install
     - yarn run build
-  path: 
-    - ./dist
+  artifacts:
+    path: 
+      - ./dist
