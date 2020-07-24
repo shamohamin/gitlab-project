@@ -1,0 +1,8 @@
+services:
+  gitlab-project-production:
+    container_name: hello-world-prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:80"

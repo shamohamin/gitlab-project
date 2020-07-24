@@ -1,0 +1,20 @@
+FROM node:13.12.0-alpine as builder
+
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package*.json ./
+COPY yarn.lock ./
+
+RUN npm ci --silent
+RUN npm -g install react-scripts 
+
+COPY . ./
+RUN npm run build
+
+# still dont know nginx
+#FROM nginx:stable-alpine
+#COPY --from=builder /app/build /usr/share/nginx/html
+#EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]    
