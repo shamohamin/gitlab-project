@@ -1,15 +1,25 @@
-image: node latest
+image: node:9.4.0
+
+cache:
+  paths:
+    - node_modules/
 
 stages:
   - build
   - deploy
 
+before_script:
+    - apt-get update -qq && apt-get install -qy libelf1
+
 build:
   stage: build
-  before-script:
-    - sudo apt install yarn
+  before_script:
+    - npm -v
+    - npm install
   script:
     - echo "building from src"
-    - yarn -v
-    - yarn install
-    - yarn run build
+    - npm run build
+    - echo "building successfull"
+  artifacts:
+    paths: 
+      - ./build
