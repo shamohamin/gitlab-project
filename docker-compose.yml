@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  user-interface:
+    image: gitlab-project
+    container_name: gitlab-project
+    build:
+      - contex: .
+      - dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 3001:3000
+    # hot-reloading
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
