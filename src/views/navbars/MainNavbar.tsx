@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 //interfaces
 import { interfaces } from "../interfaces";
 // styles
 import "../../style/mainNavbar.css";
 //jquery
 import $ from "jquery";
+import { linkGenerator } from "./utility/linkGenerator";
 
 export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
   routes,
@@ -18,33 +19,6 @@ export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
     window.addEventListener("resize", handelResize);
     return () => window.removeEventListener("resize", handelResize);
   }, []);
-
-  const linkGenerator = (
-    to: string,
-    name: string,
-    divClassanme?: string,
-    spanClassname?: string
-  ) => (
-    <div key={name} className={`${divClassanme}  `}>
-      <Link
-        style={{
-          color: `${
-            location.pathname
-              .split("/")[1]
-              .trim()
-              .toLowerCase()
-              .includes(name.toLowerCase())
-              ? "white"
-              : null
-          }`,
-        }}
-        to={to}
-      >
-        {name}
-      </Link>
-      <span className={spanClassname}></span>
-    </div>
-  );
 
   if (width > 1000) {
     $(".navbar-links").show();
@@ -66,7 +40,12 @@ export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
         <div className={`navbar-brand`}>KNTU</div>
         <div className={`navbar-links`}>
           {routes.map((route: string) =>
-            linkGenerator(`/${route}`, route, "nav-item")
+            linkGenerator(
+              `/${route.toLowerCase()}`,
+              route.toLowerCase(),
+              location,
+              "nav-item"
+            )
           )}
         </div>
       </nav>
