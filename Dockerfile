@@ -1,6 +1,8 @@
 FROM node:latest
 
-WORKDIR /usr/src/app
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
 
 RUN npm -g install react-scripts 
 

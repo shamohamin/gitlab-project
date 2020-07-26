@@ -4,14 +4,12 @@ services:
   user-interface:
     image: gitlab-project
     container_name: gitlab-project
-    build:
-      - contex: .
-      - dockerfile: Dockerfile
+    build: ./
     volumes:
       - .:/app
       - /app/node_modules
     ports:
-      - 3001:3000
+      - 3000:3000
     # hot-reloading
     environment:
       - CHOKIDAR_USEPOLLING=true
