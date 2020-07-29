@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: relative;
 }
 
 .dashboard-container * {
@@ -55,5 +54,33 @@
   background-color: #eee;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.dashboard-container .container > div:first-child {
+  width: 24%;
+  max-width: 250px;
+}
+
+.dashboard-container .container * {
+  box-sizing: border-box;
+}
+
+.dashboard-container .container > div:last-child {
+  display: block;
+  width: 78%;
+  height: 100%;
+  overflow-x: scroll;
+  position: relative;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-container .container > div:last-child {
+    width: 100%;
+  }
+  .dashboard-container .container > div:first-child {
+    width: 0%;
+  }
 }

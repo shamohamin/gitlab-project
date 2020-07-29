@@ -4,7 +4,7 @@ import FocusLock from "react-focus-lock";
 import { Menu } from "../navbars/DashboardMenu/Menu";
 import { BreadCrumps } from "../navbars/DashboardMenu/BreadCrumps";
 // styles
-import "../../style/sizeNavabarTemplate.css";
+import "../../style/sideNavabarTemplate.css";
 // interfaces
 import { interfaces } from "../interfaces";
 

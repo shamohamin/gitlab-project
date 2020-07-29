@@ -1,3 +1,7 @@
+import { RouteComponentProps } from "react-router-dom";
+import React from "react";
+import { RoutePropsType } from "../routes";
+
 export declare module interfaces {
   export type LoginStateType = {
     data: {
@@ -29,5 +33,11 @@ export declare module interfaces {
   export interface LoginRegisterComponent {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  }
+
+  export interface RouteComponents<T> {
+    chooseComponents: (
+      RouteProps: RouteComponentProps<T>
+    ) => React.Component | React.FC | JSX.Element | undefined;
   }
 }

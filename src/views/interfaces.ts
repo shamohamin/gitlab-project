@@ -1,3 +1,5 @@
+import { OutputData } from "@editorjs/editorjs";
+
 export declare module interfaces {
   export type LoginPropsType = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -29,4 +31,13 @@ export declare module interfaces {
     classname?: string;
     shapeClassname?: string;
   };
+
+  export interface IDataObj extends OutputData {
+    blocks: Array<{
+      type: string;
+      data: {
+        [key: string]: any;
+      };
+    }>;
+  }
 }
