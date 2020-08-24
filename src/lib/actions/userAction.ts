@@ -74,12 +74,11 @@ export const signIn = (postData: { [key: string]: any }, url: string) => {
   };
 };
 
-// retrive user
+// retrive user from token
 export const retriveUser = (token: string, url: string) => {
   return async (dispatch: Dispatch<AppActions>) => {
     try {
-      const user = await new RequestHandler(url).postRequest(
-        {},
+      const user = await new RequestHandler(url).getRequest(
         {},
         {
           Authorization: `Bearer ${token}`,
@@ -87,6 +86,8 @@ export const retriveUser = (token: string, url: string) => {
       );
       console.log(user);
       dispatch(userFetch({ ...user.data, token: token } as Users));
+      dispatch(authenticateSuccess());
+      localStorage.setItem("token", token);
     } catch (ex) {
       throw new Error(ex);
     }
