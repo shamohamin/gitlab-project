@@ -8,7 +8,14 @@ import {
   LOGIN,
 } from "../actions/ActionTypes";
 
-const defaultUserState: Users = {} as Users;
+const defaultUserState: Users = {
+  isAuthenticated: false,
+  email: "",
+  id: "",
+  first_name: "",
+  last_name: "",
+  role: "",
+} as Users;
 
 export const userReducer = (
   state = defaultUserState,
