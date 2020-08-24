@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
 
 .main-navbar {
   min-width: 100%;
   padding: 0px;
   margin: 0px;
-  font-family: "Lobster", cursive;
+  font-family: sans-serif, Arial, Helvetica, sans-serif;
   font-size: 19px;
-  box-shadow: 0 1px 2px 0px rgba(34, 36, 38, 0.15);
-  border-bottom: 1px solid #ddd;
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  border-bottom: 1px solid rgba(34,36,38,.15);
 }
 
 .main-navbar * {
@@ -31,7 +31,7 @@
   text-align: left;
   position: relative;
   padding: 1px;
-  background-color: #18354c;
+  background-color: #f8f9fa !important;
 }
 
 .main-navbar .navbar .navbar-links {
@@ -45,10 +45,10 @@
 }
 
 .main-navbar .navbar .navbar-brand {
-  color: white;
+  color: #000000E6;
   padding: 0px;
   padding-left: 20px;
-  padding-bottom: 7px;
+  padding-bottom: 4px;
   font-size: 2rem;
 }
 
@@ -59,18 +59,19 @@
   flex-wrap: wrap;
   padding-right: 20px;
   border-radius: 10px;
-  color: #ffffff80;
+  color: black;
   padding: 20px;
 }
 
 .main-navbar .nav-item a {
-  color: #ffffff80;
+  color: rgba(0,0,0,.5);
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
+  transition: all 250ms;
 }
 
 .main-navbar .nav-item a:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0,0,0,1);
 }
 
 .main-navbar .nav-item:last-child {
@@ -86,7 +87,7 @@
   position: absolute;
   width: 35px;
   height: 25px;
-  color: #ffffff80;
+  color: black;
   top: 20px;
   right: 30px;
   border-radius: 5px;
@@ -135,7 +136,7 @@
     display: block;
     text-align: left;
     align-self: flex-start;
-    padding: 20px;
-    padding-top: 8px;
+    padding: 11px;
+    padding-top: 12px;
   }
 }

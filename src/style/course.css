@@ -1,0 +1,29 @@
+.course {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.course .course-render {
+  width: 100%;
+  max-width: 700px;
+  background-color: #fff;
+  min-height: 300px;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 10px;
+  border-radius: 7px;
+}
+
+@media (max-width: 600px) {
+  .course {
+    margin: 0px;
+    padding: 0px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .course-render {
+    padding: 1px;
+    margin: 0px;
+  }
+}

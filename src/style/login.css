@@ -170,6 +170,32 @@
   }
 }
 
-.login-component .login-container input:focus {
+.login-component .login-container input:focus select:focus {
   box-shadow: 2px 2px 10px #d33f8d, -2px -2px 10px #d33f8d;
+}
+
+.login-component select {
+  width: 100%;
+  background-color: #e6e6e6;
+  color: #686868;
+  height: 32px;
+  padding-left: 55px;
+  border: none;
+  font-size: 16px;
+  border-radius: 3px;
+  display: block;
+  outline: none;
+}
+
+.login-component .role {
+  width: 100%;
+  position: relative;
+}
+
+.login-component .role > span {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 7px;
+  left: 20px;
 }

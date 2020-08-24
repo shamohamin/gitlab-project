@@ -50,7 +50,7 @@
   width: 85%;
   min-height: 450px;
   max-width: 950px;
-  background-color: #d4ecff;
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 45px;
   border-radius: 30px;
 }
@@ -230,14 +230,15 @@ ol {
 }
 
 .content-editable .DraftEditor-editorContainer {
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid #d4d4d5;
   min-height: 450px;
   max-width: 950px;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 24px 24px -18px rgba(69, 104, 129, 0.33),
     0 9px 45px 0 rgba(114, 119, 160, 0.12);
   font-size: 13px;
+  /* color: ; */
 }
 
 .content-editable .center-aligment {
@@ -256,15 +257,18 @@ ol {
   margin: 10px;
 }
 
-.content-editable .h1 {
-  font-size: 30px;
+.content-editable .header-one {
+  font-size: 40px;
   font-weight: 900;
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
+  margin-top: 10px;
+  text-align: center;  
 }
 
-.content-editable .h2 {
+.content-editable .header-two	 {
   font-size: 25px;
   font-weight: 800;
+  direction: inherit;
 }
 .content-editable .h3 {
   font-size: 20px;
