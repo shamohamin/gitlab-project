@@ -3,6 +3,7 @@ import { userReducer } from "./reducers/userReducer";
 import thunk, { ThunkMiddleware } from "redux-thunk";
 import { AppActions } from "./actions/ActionTypes";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { courseReducer } from "./reducers/courseReducers";
 
 declare global {
   interface Window {
@@ -11,6 +12,7 @@ declare global {
 }
 const combinedReducers = combineReducers({
   userModel: userReducer,
+  courseModel: courseReducer,
 });
 
 export type AppState = ReturnType<typeof combinedReducers>;
