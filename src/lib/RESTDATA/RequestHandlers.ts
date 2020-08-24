@@ -19,7 +19,7 @@ export class RequestHandler implements IRequestHandler {
     this.URL = url;
   }
 
-  getRequest = async (_params = {}, headers = undefined) => {
+  getRequest = async (_params = {}, headers?: any) => {
     try {
       const data = await this.request(
         Methods.GET,
