@@ -9,6 +9,12 @@ import { Profile } from "../views/dashboard_and_panel/Profile";
 import { DashboardTemplate } from "../views/dashboard_and_panel/DashboardTemplate";
 import { AdminPanel } from "../views/dashboard_and_panel/Admin.panel";
 import { EditCreateCourse } from "../views/dashboard_and_panel/course/EditCreateCourse";
+import { Course } from "../views/dashboard_and_panel/course/Course";
+// redux connectors
+import { CourseConnector } from "./redux_connectors/CRUD_CourseConnector";
+
+const ConnectedCourse = CourseConnector(Course);
+const ConnectedCourseEditor = CourseConnector(EditCreateCourse);
 
 export class DashboardWrapper
   extends React.Component<
@@ -16,20 +22,20 @@ export class DashboardWrapper
       interfaces.MainNavbarWrapperTypes & { isAdmin: boolean }
   >
   implements interfaces.RouteComponents<RoutePropsType> {
-  private handelCourseComponents = (mode: "edit" | "create" | undefined) => {
+  private handelCourseComponents = (mode: "edit" | "create" | undefined) => {    
     if (mode) {
       if (this.props.isAdmin) {
         if (mode === "edit") {
-          return <EditCreateCourse />;
+          return <ConnectedCourseEditor />;
         } else if (mode === "create") {
-          return <EditCreateCourse />;
+          return <ConnectedCourseEditor />;
         } else {
-          return <div>course</div>;
+          return <ConnectedCourse />;
         }
       }
       return <div>403 unthorized</div>;
     }
-    return <div>course</div>;
+    return <ConnectedCourse />;
   };
 
   private chooseComponentsUtil(

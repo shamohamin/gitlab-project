@@ -1,6 +1,7 @@
 import { RouteComponentProps } from "react-router-dom";
 import React from "react";
 import { RoutePropsType } from "../routes";
+import { ICourse } from "../lib/typesAndInterfaces/Course";
 
 export declare module interfaces {
   export type LoginStateType = {
@@ -13,6 +14,7 @@ export declare module interfaces {
         minLen?: number;
         isEmail?: boolean;
         isDirty?: boolean;
+        pattern?: RegExp;
       };
     };
     errors: IErrors;
@@ -27,7 +29,8 @@ export declare module interfaces {
   };
 
   export type linkDispatchPropsLogin = {
-    fetchUser: (data: { [key: string]: string }, url: string) => Promise<void>;
+    fetchUser: (data: { [key: string]: any }, url: string) => Promise<void>;
+    error?: string;
   };
 
   export interface LoginRegisterComponent {
@@ -40,4 +43,8 @@ export declare module interfaces {
       RouteProps: RouteComponentProps<T>
     ) => React.Component | React.FC | JSX.Element | undefined;
   }
+
+  export type CourseConnectorsTypes = ICourse & {
+    submitCourse: (data: ICourse) => void;
+  } & RouteComponentProps<RoutePropsType>;
 }
