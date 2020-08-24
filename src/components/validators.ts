@@ -26,6 +26,9 @@ export function loginValidator(
         if (rules[key].isEmail && !validator.isEmail(data[key])) {
           fieldError[key].push("input valid email address");
         }
+        if (rules[key].pattern && !rules[key].pattern?.test(data[key])) {
+          fieldError[key].push("input valid studnet id");
+        }
       } else {
         fieldError[key].push("value is required!");
       }
