@@ -25,22 +25,22 @@ export const Menu: React.FC<
   useEffect(() => {
     window.onscroll = () => handler();
     const stickyElement: HTMLElement | null = document.getElementById("sticky");
-    const element: HTMLElement | null = document.getElementById(
-      "sticky-toolbar"
-    );
+    // const element: HTMLElement | null = document.getElementById(
+    //   "sticky-toolbar"
+    // );
     const handler = () => {
       if (stickyElement) {
         if (129 < window.pageYOffset) {
           stickyElement.style.position = "fixed";
           stickyElement.style.bottom = "0px";
-          if (element) {
-            if (186 < window.pageYOffset) {
-              element.style.position = "fixed";
-              element.style.top = "0";
-            } else {
-              element.style.position = "";
-            }
-          }
+          // if (element) {
+          //   if (186 < window.pageYOffset) {
+          //     element.style.position = "fixed";
+          //     element.style.top = "0";
+          //   } else {
+          //     element.style.position = "";
+          //   }
+          // }
         } else {
           stickyElement.style.position = "";
         }
@@ -49,7 +49,10 @@ export const Menu: React.FC<
   });
 
   return (
-    <div id="sticky" style={{ height: "100vh", overflowY: "scroll" }}>
+    <div
+      id="sticky"
+      style={{ height: "100vh", overflowY: "scroll", minWidth:'250px' }}
+    >
       <StyledMenu open={open}>
         {routeRendersProps.map(({ path, spanClassname, name }) =>
           linkGenerator(path, name, location, "", spanClassname, setOpen)

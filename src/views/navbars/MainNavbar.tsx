@@ -34,7 +34,7 @@ export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
     <div className="main-navbar">
       <nav className="navbar">
         <span
-          className="slide-button fa fa-bars fa-1x"
+          className={"slide-button fa fa-bars fa-1x"}
           onClick={() => $(".navbar-links").not(".nav-item").toggle("slow")}
         ></span>
         <div className={`navbar-brand`}>KNTU</div>

@@ -19,7 +19,7 @@ export const linkGenerator = (
             .trim()
             .toLowerCase()
             .includes(name.toLowerCase())
-            ? "white"
+            ? "rgba(0,0,0,1)"
             : null
         }`, width: '100%',
         display: 'block'
