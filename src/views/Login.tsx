@@ -10,16 +10,17 @@ export const spanStyle: React.CSSProperties = {
   fontSize: "14px",
   color: "#ff0000",
   display: "inlineBlock",
-  width: "80%",
-  paddingLeft: "10px",
+  width: "100%",
+  paddingBottom: "4px",
+  marginBottom: "3px",
 };
 
 const divStyle: React.CSSProperties = {
   width: "100%",
   display: "block",
-  marginTop: "5px",
-  paddingBottom: "0px",
-  marginBottom: "0px",
+  marginTop: "2px",
+  paddingBottom: "3px",
+  marginBottom: "4px",
 };
 
 export enum Shapes {
@@ -44,23 +45,15 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
 
   const inputs: interfaces.InputProps[] = Object.keys(values).map(
     (key: string) => {
-      if (key !== "role") {
-        return {
-          name: key,
-          value: values[key],
-          onChange: onChange,
-          autoFocus: key === "first_name" || key === "user_name" ? true : false,
-          type: key === "password" ? "password" : "text",
-          shapeClassname:
-            Shapes[(key as unknown) as keyof typeof Shapes] || Shapes.email,
-        };
-      } else {
-        return {
-          type: "select",
-          value: values[key],
-          onChange: onChange,
-        };
-      }
+      return {
+        name: key,
+        value: values[key],
+        onChange: onChange,
+        autoFocus: key === "first_name" || key === "user_name" ? true : false,
+        type: key === "password" ? "password" : "text",
+        shapeClassname:
+          Shapes[(key as unknown) as keyof typeof Shapes] || Shapes.email,
+      };
     }
   );
 
@@ -73,48 +66,32 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
         type,
         shapeClassname,
         autoFocus,
-      }: interfaces.InputProps) =>
-        type !== "select" ? (
-          <div key={shapeClassname} className="input-wrap">
-            <input
-              name={name}
-              value={value as string}
-              onChange={onChange}
-              type={type}
-              autoComplete="off"
-              autoFocus={autoFocus}
-              placeholder={name?.split("_").join(" ")}
-              disabled={values["role"] === ROLES["admin"]}
-            />
-            {isDirty !== undefined
-              ? isDirty[name || ""] === true
-                ? errors[name || ""].map((err: string) => (
-                    <div style={divStyle} key={err}>
-                      <span style={spanStyle}>{err}</span>
-                    </div>
-                  ))
-                : null
-              : null}
-            <span className={shapeClassname}></span>
-          </div>
-        ) : (
-          <div className="role" key={"aa"}>
-            <span className={Shapes["role"]}></span>
-            <select
-              value={value as string}
-              onChange={onChangeSelect}
-              name={name}
-            >
-              {Object.keys(ROLES).map((key: string) => (
-                <option key={ROLES[key]} value={ROLES[key]}>
-                  {ROLES[key]}
-                </option>
-              ))}
-            </select>
-          </div>
-        )
+      }: interfaces.InputProps) => (
+        <div key={shapeClassname} className="input-wrap">
+          <input
+            name={name}
+            value={value as string}
+            onChange={onChange}
+            type={type}
+            autoComplete="off"
+            autoFocus={autoFocus}
+            placeholder={name?.split("_").join(" ")}
+            disabled={values["role"] === ROLES["admin"]}
+          />
+          {isDirty !== undefined
+            ? isDirty[name || ""] === true
+              ? errors[name || ""].map((err: string) => (
+                  <div style={divStyle} key={err}>
+                    <span style={spanStyle}>{err}</span>
+                  </div>
+                ))
+              : null
+            : null}
+          <span className={shapeClassname}></span>
+        </div>
+      )
     );
-    console.log(errors)
+
   return (
     <div className="login-component">
       <div className="login-container p-r-50 p-l-50 p-t-77 p-b-30">
@@ -122,7 +99,9 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
           <h1>{name}</h1>
           {errors[name.toLowerCase()]
             ? errors[name.toLowerCase()].map((item) => (
-                <span style={spanStyle}>{item}</span>
+                <span key={item} style={spanStyle}>
+                  {item}
+                </span>
               ))
             : null}
           {inputGenerator(inputs)}
