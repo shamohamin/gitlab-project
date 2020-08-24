@@ -9,15 +9,23 @@ import { loginValidator } from "./validators";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../lib/actions/ActionTypes";
-import { fetchUser } from "../lib/actions/userAction";
+import { signIn } from "../lib/actions/userAction";
+import { URLS } from "../lib/RESTDATA/URLS";
+import { AppState } from "../lib";
+// router-dom
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { RoutePropsType } from "../routes";
 
 class LoginWrapper
   extends React.Component<
-    interfaces.linkDispatchPropsLogin,
+    interfaces.linkDispatchPropsLogin & RouteComponentProps<RoutePropsType>,
     interfaces.LoginStateType
   >
   implements interfaces.LoginRegisterComponent {
-  constructor(props: Readonly<interfaces.linkDispatchPropsLogin>) {
+  constructor(
+    props: Readonly<interfaces.linkDispatchPropsLogin> &
+      RouteComponentProps<RoutePropsType>
+  ) {
     super(props);
     this.state = {
       data: {
@@ -57,9 +65,29 @@ class LoginWrapper
     ev: React.FormEvent<HTMLFormElement>
   ) => {
     ev.preventDefault();
-    if (this.validate()) {
-      await this.props.fetchUser({ ...this.state.data }, "ss");
-      console.log("submited");
+    try {
+      if (this.validate()) {
+        await this.props.fetchUser({ ...this.state.data }, URLS.LOGINUSER);
+        console.log("submited");
+        this.setState((state: interfaces.LoginStateType) => {
+          state.errors["login"] = ["evrything was ok!"];
+          return {
+            ...state,
+          };
+        });
+        this.props.history.push("/dashboard");
+      }
+    } catch (ex) {
+      console.log(ex);
+      this.setState((state: interfaces.LoginStateType) => {
+        console.log(this.props.error);
+        state.errors["login"] = [this.props.error!];
+        console.log(state);
+        return {
+          ...state,
+          errors: state.errors,
+        };
+      });
     }
   };
 
@@ -70,7 +98,10 @@ class LoginWrapper
     const errors: interfaces.IErrors = loginValidator(state);
     return {
       ...state,
-      errors,
+      errors: {
+        ...state.errors,
+        ...errors,
+      },
     };
   }
 
@@ -103,7 +134,7 @@ class LoginWrapper
     Object.keys(this.state.rules).forEach((key: string) => {
       dirty[key] = this.state.rules[key].isDirty;
     });
-
+    console.log(this.state.errors);
     return (
       <Login
         onChange={this.onChange}
@@ -119,7 +150,14 @@ class LoginWrapper
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>) => ({
   fetchUser: (data: { [key: string]: string }, url: string) =>
-    dispatch(fetchUser(data, url)),
+    dispatch(signIn(data, url)),
 });
 
-export default connect(() => ({}), mapDispatchToProps)(LoginWrapper);
+export default withRouter(
+  connect(
+    (state: AppState) => ({
+      error: state.userModel.authenticationErr,
+    }),
+    mapDispatchToProps
+  )(LoginWrapper)
+);
