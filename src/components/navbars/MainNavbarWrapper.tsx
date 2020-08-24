@@ -1,5 +1,7 @@
 import React from "react";
-import { MainNavbar } from "../../views/navbars/MainNavbar";
+// views
+import MainNavbar from "../../views/navbars/MainNavbar";
+// interfaces
 import { interfaces } from "../interfaces";
 
 export const MainNavbarWapper: React.FC<interfaces.MainNavbarWrapperTypes> = ({
