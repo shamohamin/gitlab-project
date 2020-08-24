@@ -1,35 +1,31 @@
 import React from "react";
-// import {
-//   HashRouter as Router,
-//   Route,
-//   Switch,
-//   Redirect,
-//   RouteComponentProps,
-// } from "react-router-dom";
-// import LoginWrapper from "./componnets/LoginWrapper";
 import { Routes } from "./routes";
+// redux
+import { connect } from "react-redux";
+import { AppState } from "./lib";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "./lib/actions/ActionTypes";
+import { logout } from "./lib/actions/userAction";
 
-// type RouteSection = {
-//   section: string;
-// };
-
-class Connector extends React.Component<{}, {}> {
-  // private chooseComponent(routeProps: RouteComponentProps<RouteSection>) {
-  //   if (routeProps.match.params.section) {
-  //     switch (routeProps.match.params.section) {
-  //       case "login":
-  //         return <LoginWrapper />;
-  //       default:
-  //         return <Redirect to="/login" />;
-  //     }
-  //   } else {
-  //     return <Redirect to="/login" />;
-  //   }
-  // }
-
+class Connector extends React.Component<
+  {
+    isAuthenticated: boolean;
+    logout: () => void;
+  },
+  {}
+> {
   render() {
-    return <Routes />;
+    return (
+      <Routes logout={this.props.logout} isAuth={this.props.isAuthenticated} />
+    );
   }
 }
 
-export default Connector;
+export default connect(
+  (state: AppState) => ({
+    isAuthenticated: state.userModel.isAuthenticated,
+  }),
+  (dispatch: ThunkDispatch<any, any, AppActions>) => ({
+    logout: () => dispatch(logout()),
+  })
+)(Connector);
