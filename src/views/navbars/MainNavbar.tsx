@@ -6,10 +6,15 @@ import { interfaces } from "../interfaces";
 import "../../style/mainNavbar.css";
 //jquery
 import $ from "jquery";
+// utility
 import { linkGenerator } from "./utility/linkGenerator";
+// connect
+import { connect } from "react-redux";
+import { AppState } from "../../lib";
 
-export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
+const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
   routes,
+  isAthunticated,
 }) => {
   const location = useLocation();
   const [width, setWidth] = useState<number>(window && window.innerWidth);
@@ -29,6 +34,21 @@ export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
     $(".navbar-links").hide();
     $(".navbar-links").css({ display: "none" });
   }
+  const authenticatedRoutes = isAthunticated
+    ? routes.filter((item: string) =>
+        item.toLowerCase() === "dashboard"
+          ? item
+          : item.toLowerCase() === "logout"
+          ? item
+          : ""
+      )
+    : routes.filter((item: string) =>
+        item.toLowerCase() === "dashboard"
+          ? ""
+          : item.toLowerCase() === "logout"
+          ? ""
+          : item
+      );
 
   return (
     <div className="main-navbar">
@@ -39,7 +59,7 @@ export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
         ></span>
         <div className={`navbar-brand`}>KNTU</div>
         <div className={`navbar-links`}>
-          {routes.map((route: string) =>
+          {authenticatedRoutes.map((route: string) =>
             linkGenerator(
               `/${route.toLowerCase()}`,
               route.toLowerCase(),
@@ -52,3 +72,7 @@ export const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
     </div>
   );
 };
+
+export default connect((state: AppState) => ({
+  isAthunticated: state.userModel.isAuthenticated || false,
+}))(MainNavbar);
