@@ -9,7 +9,7 @@ import {
 // components
 import { Template } from "./components/Template";
 import LoginWrapper from "./components/LoginWrapper";
-import { SignUpWrapper } from "./components/SingUpWrapper";
+import SignUpWrapper from "./components/SingUpWrapper";
 import { NotFound } from "./views/404";
 import { DashboardWrapper } from "./components/DashboardWrapper";
 // routes array
