@@ -35,7 +35,7 @@ export class RequestHandler implements IRequestHandler {
     }
   };
 
-  postRequest = async (_params = {}, postData = {}, header = undefined) => {
+  postRequest = async (_params = {}, postData = {}, header?: any) => {
     try {
       const data = await this.request(
         Methods.POST,
@@ -56,7 +56,7 @@ export class RequestHandler implements IRequestHandler {
     url: string,
     params?: any,
     data?: any,
-    headers = undefined
+    headers?: any
   ) =>
     Axios.request({
       url,
