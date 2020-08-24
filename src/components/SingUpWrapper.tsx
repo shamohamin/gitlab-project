@@ -32,7 +32,6 @@ const defaultState: interfaces.LoginStateType = {
     email: "",
     password: "",
     student_id: "",
-    role: ROLES["role"],
   },
   rules: {
     first_name: {
@@ -55,13 +54,10 @@ const defaultState: interfaces.LoginStateType = {
       isEmail: true,
       isDirty: false,
     },
-    role: {
-      required: true,
-      isDirty: false,
-    },
     student_id: {
       required: true,
-      pattern: /^9\d{6}/,
+      pattern: /\d{7}/,
+      isDirty: false,
     },
   },
   errors: {} as interfaces.IErrors,
@@ -96,28 +92,33 @@ class SignUpWrapper
     this.changeUtil(ev.target.name, ev.target.value as string);
   };
 
-  onChangeSelect = (ev: React.ChangeEvent<HTMLSelectElement>) => {
-    ev.persist();
-    console.log(ev.target.value);
-    this.changeUtil("role", ev.target.value);
-  };
-
   onSubmit = async (ev: React.FormEvent<HTMLFormElement>): Promise<void> => {
     ev.preventDefault();
-    const postData = {
-      ...this.state.data,
-      role: {
-        id: 0,
-        name: this.state.data["role"],
-      },
-    };
-    console.log(postData);
-    try {
-      await this.props.fetchUser(postData, URLS.POSTUSER);
-      this.props.history.push("/login");
-    } catch (ex) {
-      this.setState((state: interfaces.LoginStateType) => {
-        state.errors["signup"] = [this.props.error!, ex];
+    if (this.valid) {
+      const postData = {
+        ...this.state.data,
+        role: {
+          id: 0,
+          name: "student",
+        },
+      };
+      console.log(postData);
+      try {
+        await this.props.fetchUser(postData, URLS.POSTUSER);
+        this.props.history.push("/login");
+      } catch (ex) {
+        this.setState((state: interfaces.LoginStateType) => {
+          state.errors["singup"] = [this.props.error!];
+          return {
+            ...state,
+          };
+        });
+      }
+    } else {
+      this.setState((state: interfaces.LoginStateType) => { 
+        Object.keys(state.rules).forEach((key) => {
+          state.rules[key].isDirty = true;
+        });
         return {
           ...state,
         };
@@ -125,22 +126,28 @@ class SignUpWrapper
     }
   };
 
+  get valid() {
+    let val = true;
+    Object.keys(this.state.errors).forEach((key: string) => {
+      if (key !== 'signup' && this.state.errors[key].length !== 0) {
+        val = false;
+      }
+    });
+    return val;
+  }
+
   static getDerivedStateFromProps(
     _: any,
     state: interfaces.LoginStateType
   ): interfaces.LoginStateType {
-    if (state.data["role"] === ROLES["admin"]) {
-      state.data["student_id"] = "0";
-    }
     const errors: interfaces.IErrors = loginValidator(state);
     return {
       ...state,
-      errors,
+      errors: { ...state.errors, ...errors },
     };
   }
 
   render() {
-    console.log(this.props);
     const dirty = {} as { [key: string]: boolean | undefined };
 
     Object.keys(this.state.rules).forEach((key: string) => {
@@ -149,7 +156,6 @@ class SignUpWrapper
 
     return (
       <Login
-        onChangeSelect={this.onChangeSelect}
         onChange={this.onChange}
         onSubmit={this.onSubmit}
         values={this.state.data}
