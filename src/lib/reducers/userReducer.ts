@@ -35,6 +35,7 @@ export const userReducer = (
       return {
         ...state,
         isAuthenticated: true,
+        authenticationErr: "",
       };
     case AUTHENTICATION_FAILD:
       return {
@@ -43,8 +44,10 @@ export const userReducer = (
         authenticationErr: action.payload,
       };
     case LOGOUT:
-      localStorage.removeItem("token");
-      return {} as Users;
+      if (localStorage.getItem("token")) {
+        localStorage.removeItem("token");
+      }
+      return defaultUserState as Users;
     default:
       return state || ({} as Users);
   }
