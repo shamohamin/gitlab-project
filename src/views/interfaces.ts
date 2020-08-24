@@ -1,8 +1,10 @@
 import { OutputData } from "@editorjs/editorjs";
+import { EditorState as ES } from "draft-js";
 
 export declare module interfaces {
   export type LoginPropsType = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeSelect?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     values: {
       [key: string]: string;
     };
@@ -25,7 +27,7 @@ export declare module interfaces {
   export type InputProps = {
     type: string;
     name?: string;
-    value?: string;
+    value?: string | { [key: string]: string };
     autoFocus?: boolean;
     onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
     classname?: string;
@@ -40,4 +42,27 @@ export declare module interfaces {
       };
     }>;
   }
+
+  export type EditorToolbarProps = {
+    editorState: ES;
+    onChange: (state: any) => void;
+    linkPrompt: any;
+    showUrl: boolean;
+    onChangeUrl: any;
+    confirmLink: any;
+    urlValue: any;
+    disableAnchor: any;
+    onChangeImage: any;
+    showImage: boolean;
+    imageUrl: string;
+    promtForImage: any;
+  };
+
+  export type EditorState = {
+    editorState: ES;
+    showUrl: boolean;
+    urlValue: string;
+    imageUrl: string;
+    showImage: boolean;
+  };
 }

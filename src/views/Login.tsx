@@ -4,6 +4,7 @@ import GoogleLogin from "react-google-login";
 //interfaces
 import { interfaces } from "./interfaces";
 import { useHistory } from "react-router-dom";
+import { ROLES } from "../components/SingUpWrapper";
 
 export const spanStyle: React.CSSProperties = {
   fontSize: "14px",
@@ -21,25 +22,17 @@ const divStyle: React.CSSProperties = {
   marginBottom: "0px",
 };
 
-export const errorSpanStyle: React.CSSProperties = {
-  backgroundColor: "red",
-  fontSize: "12px",
-  fontWeight: "bold",
-  borderRadius: "7px",
-  color: "white",
-  width: "20%",
-  padding: "2px",
-  textAlign: "center",
-};
-
 export enum Shapes {
   email = "fa fa-envelope fa-lg",
   first_name = "fa fa-user fa-lg",
-  last_name = "fa fa-id-card fa-lg",
+  last_name = "fa fa-file-alt fa-lg",
   password = "fa fa-key fa-lg",
+  student_id = "fa fa-id-card fa-lg",
+  role = "fas fa-user-tag",
 }
 
 export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
+  onChangeSelect,
   onChange,
   values,
   onSubmit,
@@ -51,57 +44,87 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
 
   const inputs: interfaces.InputProps[] = Object.keys(values).map(
     (key: string) => {
-      return {
-        name: key,
-        value: values[key],
-        onChange: onChange,
-        autoFocus: key === "first_name" || key === "user_name" ? true : false,
-        type: key === "password" ? "password" : "text",
-        shapeClassname:
-          Shapes[(key as unknown) as keyof typeof Shapes] || Shapes.email,
-      };
+      if (key !== "role") {
+        return {
+          name: key,
+          value: values[key],
+          onChange: onChange,
+          autoFocus: key === "first_name" || key === "user_name" ? true : false,
+          type: key === "password" ? "password" : "text",
+          shapeClassname:
+            Shapes[(key as unknown) as keyof typeof Shapes] || Shapes.email,
+        };
+      } else {
+        return {
+          type: "select",
+          value: values[key],
+          onChange: onChange,
+        };
+      }
     }
   );
 
   const inputGenerator = (inputs: interfaces.InputProps[]): JSX.Element[] =>
     inputs.map(
       ({
-        value = "",
+        value,
         name,
         onChange,
         type,
         shapeClassname,
         autoFocus,
-      }: interfaces.InputProps) => (
-        <div key={name} className="input-wrap">
-          <input
-            name={name}
-            value={value}
-            onChange={onChange}
-            type={type}
-            autoComplete="off"
-            autoFocus={autoFocus}
-            placeholder={name?.split("_").join(" ")}
-          />
-          {isDirty !== undefined
-            ? isDirty[name || ""] === true
-              ? errors[name || ""].map((err: string) => (
-                  <div style={divStyle} key={err}>
-                    <span style={errorSpanStyle}>Error</span>
-                    <span style={spanStyle}>{err}</span>
-                  </div>
-                ))
-              : null
-            : null}
-          <span className={shapeClassname}></span>
-        </div>
-      )
+      }: interfaces.InputProps) =>
+        type !== "select" ? (
+          <div key={shapeClassname} className="input-wrap">
+            <input
+              name={name}
+              value={value as string}
+              onChange={onChange}
+              type={type}
+              autoComplete="off"
+              autoFocus={autoFocus}
+              placeholder={name?.split("_").join(" ")}
+              disabled={values["role"] === ROLES["admin"]}
+            />
+            {isDirty !== undefined
+              ? isDirty[name || ""] === true
+                ? errors[name || ""].map((err: string) => (
+                    <div style={divStyle} key={err}>
+                      <span style={spanStyle}>{err}</span>
+                    </div>
+                  ))
+                : null
+              : null}
+            <span className={shapeClassname}></span>
+          </div>
+        ) : (
+          <div className="role" key={"aa"}>
+            <span className={Shapes["role"]}></span>
+            <select
+              value={value as string}
+              onChange={onChangeSelect}
+              name={name}
+            >
+              {Object.keys(ROLES).map((key: string) => (
+                <option key={ROLES[key]} value={ROLES[key]}>
+                  {ROLES[key]}
+                </option>
+              ))}
+            </select>
+          </div>
+        )
     );
+    console.log(errors)
   return (
     <div className="login-component">
       <div className="login-container p-r-50 p-l-50 p-t-77 p-b-30">
         <form className="login-form" method="post" onSubmit={onSubmit}>
           <h1>{name}</h1>
+          {errors[name.toLowerCase()]
+            ? errors[name.toLowerCase()].map((item) => (
+                <span style={spanStyle}>{item}</span>
+              ))
+            : null}
           {inputGenerator(inputs)}
           <div className="form-btn">
             {" "}
