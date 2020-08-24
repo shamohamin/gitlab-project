@@ -18,6 +18,7 @@ export declare module interfaces {
 
   export type MainNavbarTypes = {
     routes: string[];
+    isAthunticated?: boolean;
   };
 
   export type IErrors = {
