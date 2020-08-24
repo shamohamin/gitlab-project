@@ -68,19 +68,27 @@ class LoginWrapper
     try {
       if (this.validate()) {
         await this.props.fetchUser({ ...this.state.data }, URLS.LOGINUSER);
-        console.log("submited");
+        if (this.props.location.state) {
+          if ("from" in this.props.location.state) {
+            const { from } = this.props.location.state || { from: "dashboard" };
+            this.props.history.push(from);
+          }
+        } else {
+          this.props.history.push("/dashboard");
+        }
+      } else {
         this.setState((state: interfaces.LoginStateType) => {
-          state.errors["login"] = ["evrything was ok!"];
-          return {
-            ...state,
-          };
+          Object.keys(state.errors).forEach((key: string) => {
+            state.rules[key].isDirty = true;
+            return {
+              ...state,
+            };
+          });
         });
-        this.props.history.push("/dashboard");
       }
     } catch (ex) {
       console.log(ex);
       this.setState((state: interfaces.LoginStateType) => {
-        console.log(this.props.error);
         state.errors["login"] = [this.props.error!];
         console.log(state);
         return {
@@ -107,25 +115,13 @@ class LoginWrapper
 
   private validate = (): boolean => {
     let valid = true;
-    try {
-      const errors = loginValidator(this.state);
-      this.setState({ errors });
-      Object.keys(errors).forEach((key: string) => {
-        if (errors[key].length > 0) {
-          valid = false;
-        }
-      });
-    } catch (ex) {
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          field_not_found: ["username and password field went wrong."],
-        },
-      });
-      valid = false;
-    } finally {
-      return valid;
-    }
+    const errors = this.state.errors;
+    Object.keys(errors).forEach((key: string) => {
+      if (key !== "login" && errors[key].length > 0) {
+        valid = false;
+      }
+    });
+    return valid;
   };
 
   render() {
