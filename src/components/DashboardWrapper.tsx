@@ -8,10 +8,12 @@ import { interfaces } from "./interfaces";
 import { Profile } from "../views/dashboard_and_panel/Profile";
 import { DashboardTemplate } from "../views/dashboard_and_panel/DashboardTemplate";
 import { AdminPanel } from "../views/dashboard_and_panel/Admin.panel";
-import { EditCreateCourse } from "../views/dashboard_and_panel/course/EditCreateCourse";
+import { EditCreateCourse } from "../views/dashboard_and_panel/course/EditCreateHomeWorks";
 import { Course } from "../views/dashboard_and_panel/course/Course";
+import { Dashbaord } from "../views/dashboard_and_panel/dashboard";
 // redux connectors
 import { CourseConnector } from "./redux_connectors/CRUD_CourseConnector";
+import { DefineCourseWrapper } from "./dashbaordToolWrappers/DefineCourseWrapper";
 
 const ConnectedCourse = CourseConnector(Course);
 const ConnectedCourseEditor = CourseConnector(EditCreateCourse);
@@ -22,18 +24,30 @@ export class DashboardWrapper
       interfaces.MainNavbarWrapperTypes & { isAdmin: boolean }
   >
   implements interfaces.RouteComponents<RoutePropsType> {
-  private handelCourseComponents = (mode: "edit" | "create" | undefined) => {    
-    if (mode) {
-      if (this.props.isAdmin) {
-        if (mode === "edit") {
-          return <ConnectedCourseEditor />;
-        } else if (mode === "create") {
-          return <ConnectedCourseEditor />;
-        } else {
-          return <ConnectedCourse />;
+  private handelCourseComponents = <
+    T extends "edit" | "create" | "homework" | undefined
+  >(
+    courseMode: T,
+    mode: T
+  ) => {
+    console.log(courseMode, mode);
+    if (courseMode && courseMode === "homework") {
+      if (mode) {
+        if (this.props.isAdmin) {
+          if (mode === "edit" || mode === "create") {
+            return <ConnectedCourseEditor />;
+          } else {
+            return <ConnectedCourse />;
+          }
         }
+        return <div>403 unthorized</div>;
       }
-      return <div>403 unthorized</div>;
+    } else if (courseMode && courseMode === "create") {
+      if (this.props.isAdmin) {
+        return <DefineCourseWrapper />
+      } else {
+        return <Redirect to="/dashbaord" />;
+      }
     }
     return <ConnectedCourse />;
   };
@@ -43,14 +57,14 @@ export class DashboardWrapper
   ) {
     const {
       match: {
-        params: { section, mode },
+        params: { section, mode, courseMode },
       },
     } = RouteProps;
 
     if (section) {
       switch (section) {
         case "course":
-          return this.handelCourseComponents(mode);
+          return this.handelCourseComponents(courseMode, mode);
         case "profile":
           return <Profile />;
         case "admin":
@@ -59,7 +73,7 @@ export class DashboardWrapper
           return <Redirect to="/dashboard" />;
       }
     }
-    return <Redirect to="/dashboard" />;
+    return <Dashbaord />;
   }
 
   chooseComponents = (RouteProps: RouteComponentProps<RoutePropsType>) => {
