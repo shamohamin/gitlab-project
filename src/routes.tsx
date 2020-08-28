@@ -32,6 +32,7 @@ export interface RoutePropsType {
   section: string;
   mode: "edit" | "create" | undefined;
   courseId: string;
+  courseMode: "edit" | "create" | "homework" | undefined;
 }
 
 export const Routes: React.FC<{ isAuth: boolean; logout: () => void }> = ({
@@ -62,7 +63,7 @@ export const Routes: React.FC<{ isAuth: boolean; logout: () => void }> = ({
             <Route path="/sign_up" component={() => Wrapper(SignUpWrapper)} />
             {
               <Route
-                path="/dashboard/:section?/:courseId?/:mode?"
+                path="/dashboard/:section?/:courseMode?/:courseId?/:mode?"
                 render={(routeProps: RouteComponentProps<RoutePropsType>) =>
                   Wrapper(DashboardLazy, {
                     ...routeProps,
