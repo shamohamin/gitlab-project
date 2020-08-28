@@ -13,7 +13,7 @@ export declare module interfaces {
     isDirty?: {
       [key: string]: boolean | undefined;
     };
-    name: string;
+    name?: string;
   };
 
   export type MainNavbarTypes = {
@@ -43,6 +43,14 @@ export declare module interfaces {
       };
     }>;
   }
+
+  export type CourseType = {
+    name: string;
+    instructor: string;
+    startDate: string;
+    endDate?: string;
+    numberOfHomeWorks?: number;
+  };
 
   export type EditorToolbarProps = {
     editorState: ES;

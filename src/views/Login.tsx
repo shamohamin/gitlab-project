@@ -1,6 +1,6 @@
 import React from "react";
 import "../style/login.css";
-import GoogleLogin from "react-google-login";
+// import GoogleLogin from "react-google-login";
 //interfaces
 import { interfaces } from "./interfaces";
 import { useHistory } from "react-router-dom";
@@ -15,7 +15,7 @@ export const spanStyle: React.CSSProperties = {
   marginBottom: "3px",
 };
 
-const divStyle: React.CSSProperties = {
+export const divStyle: React.CSSProperties = {
   width: "100%",
   display: "block",
   marginTop: "2px",
@@ -64,10 +64,10 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
         name,
         onChange,
         type,
-        shapeClassname,
         autoFocus,
+        shapeClassname,
       }: interfaces.InputProps) => (
-        <div key={shapeClassname} className="input-wrap">
+        <div key={name + type} className="input-wrap">
           <input
             name={name}
             value={value as string}
@@ -97,8 +97,8 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
       <div className="login-container p-r-50 p-l-50 p-t-77 p-b-30">
         <form className="login-form" method="post" onSubmit={onSubmit}>
           <h1>{name}</h1>
-          {errors[name.toLowerCase()]
-            ? errors[name.toLowerCase()].map((item) => (
+          {errors[name!.toLowerCase()]
+            ? errors[name!.toLowerCase()].map((item) => (
                 <span key={item} style={spanStyle}>
                   {item}
                 </span>
@@ -107,17 +107,17 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
           {inputGenerator(inputs)}
           <div className="form-btn">
             {" "}
-            <button type="submit"> {name.toUpperCase()} </button>{" "}
+            <button type="submit"> {name!.toUpperCase()} </button>{" "}
           </div>
 
           <div className="text-center">
             <span> Or login with </span>
           </div>
-          <div className="google">
+          {/* <div className="google">
             <GoogleLogin clientId="" buttonText="Google" />
-          </div>
+          </div> */}
           <div className="text-center">
-            {name.toLowerCase() === "login" ? (
+            {name!.toLowerCase() === "login" ? (
               <span>Not a member?</span>
             ) : (
               <span> member? </span>
@@ -133,12 +133,12 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
               }}
               onClick={() =>
                 history.push(
-                  name.toLowerCase() === "login" ? "/sign_up" : "/login"
+                  name!.toLowerCase() === "login" ? "/sign_up" : "/login"
                 )
               }
             >
               {" "}
-              {name.toLowerCase() === "login" ? "sign up now" : "sign in now"}
+              {name!.toLowerCase() === "login" ? "sign up now" : "sign in now"}
             </span>
           </div>
         </form>
