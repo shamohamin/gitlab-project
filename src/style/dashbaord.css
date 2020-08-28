@@ -1,0 +1,83 @@
+.dashbaord {
+  width: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  align-self: center;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.dashbaord .title {
+  border-radius: 5px;
+  width: 50%;
+  max-width: 420px;
+  height: 20px;
+  padding: 30px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 3px -1px black, -1px -1px 3px -2px black;
+}
+
+.dashbaord .title:nth-child(n + 2) {
+    margin-top: 25px;
+}
+
+.dashbaord .content {
+  max-width: 1200px;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-left: 30px;
+  padding-bottom: 20px;
+  padding-top: 35px;
+}
+
+.dashbaord .content .item {
+  min-width: 25%;
+  max-width: 30%;
+  flex: 1 0 30%;
+  cursor: pointer;
+  margin-right: 15px;
+  margin-top: 25px;
+  height: 410px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  position: relative;
+  z-index: 0;
+}
+
+.dashbaord .content .item > div:first-child > * {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.dashbaord .content .item > div:first-child > img {
+  width: 100%;
+  padding: 0px;
+  border-radius: 3px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.dashbaord .content .item .child {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
+    0px -4px 8px rgba(255, 255, 255, 0.8);
+  background-color: #ffffff;
+  z-index: 5;
+}
