@@ -20,35 +20,26 @@ export class RequestHandler implements IRequestHandler {
   }
 
   getRequest = async (_params = {}, headers?: any) => {
-    try {
-      const data = await this.request(
-        Methods.GET,
-        this.URL,
-        _params,
-        {},
-        headers
-      );
-      return data;
-    } catch (ex) {
-      console.log("error occure during fetch data", ex);
-      throw new Error(ex);
-    }
+    const data = await this.request(
+      Methods.GET,
+      this.URL,
+      _params,
+      {},
+      headers
+    );
+    return data;
   };
 
   postRequest = async (_params = {}, postData = {}, header?: any) => {
-    try {
-      const data = await this.request(
-        Methods.POST,
-        this.URL,
-        _params,
-        postData,
-        header
-      );
-      return data;
-    } catch (ex) {
-      console.log("error while fetching data", ex);
-      throw new Error(ex);
-    }
+    const data = await this.request(
+      Methods.POST,
+      this.URL,
+      _params,
+      postData,
+      header
+    );
+    console.log(data.data);
+    return data;
   };
 
   private request = async (

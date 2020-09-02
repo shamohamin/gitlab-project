@@ -53,8 +53,17 @@ export const singUser = (postData: { [key: string]: any }, url: string) => {
       await new RequestHandler(url).postRequest({}, postData);
       dispatch(signUp());
     } catch (ex) {
-      dispatch(authenticateFailed(ex.toString()));
-      throw new Error("faild to sing try again.");
+      console.log(Object.keys(ex), ex.response);
+      if (Object.keys(ex).indexOf("response")) {
+        dispatch(authenticateFailed(ex.response.data));
+      } else {
+        dispatch(
+          authenticateFailed(
+            "something went wrong refresh the page and try again !"
+          )
+        );
+      }
+      throw new Error(ex.response.data);
     }
   };
 };
