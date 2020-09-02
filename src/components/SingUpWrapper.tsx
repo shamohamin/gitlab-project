@@ -81,6 +81,7 @@ class SignUpWrapper
     this.setState((state: interfaces.LoginStateType) => {
       state.data[name && name] = value;
       state.rules[name && name].isDirty = true;
+      state.errors['singup'] = []
       return {
         ...state,
       };

@@ -55,6 +55,7 @@ class LoginWrapper
     this.setState((state) => {
       state.data[event.target.name && event.target.name] = event.target.value;
       state.rules[event.target.name && event.target.name].isDirty = true;
+      state.errors['login'] = []
       return {
         ...state,
       };
