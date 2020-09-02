@@ -11,8 +11,9 @@ export const spanStyle: React.CSSProperties = {
   color: "#ff0000",
   display: "inlineBlock",
   width: "100%",
-  paddingBottom: "4px",
+  paddingBottom: "8px",
   marginBottom: "3px",
+  textAlign:'center'
 };
 
 export const divStyle: React.CSSProperties = {
@@ -97,12 +98,14 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
       <div className="login-container p-r-50 p-l-50 p-t-77 p-b-30">
         <form className="login-form" method="post" onSubmit={onSubmit}>
           <h1>{name}</h1>
-          {errors[name!.toLowerCase()]
-            ? errors[name!.toLowerCase()].map((item) => (
-                <span key={item} style={spanStyle}>
-                  {item}
-                </span>
-              ))
+          {name
+            ? errors[name!.toLowerCase()]
+              ? errors[name!.toLowerCase()].map((item) => (
+                  <span key={item} style={spanStyle}>
+                    {item}
+                  </span>
+                ))
+              : null
             : null}
           {inputGenerator(inputs)}
           <div className="form-btn">
