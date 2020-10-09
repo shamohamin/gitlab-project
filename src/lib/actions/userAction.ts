@@ -53,7 +53,6 @@ export const singUser = (postData: { [key: string]: any }, url: string) => {
       await new RequestHandler(url).postRequest({}, postData);
       dispatch(signUp());
     } catch (ex) {
-      console.log(Object.keys(ex), ex.response);
       if (Object.keys(ex).indexOf("response")) {
         dispatch(authenticateFailed(ex.response.data));
       } else {
@@ -77,8 +76,8 @@ export const signIn = (postData: { [key: string]: any }, url: string) => {
       await retriveUser(token.data, URLS.RETRIVEUSER)(dispath);
       dispath(authenticateSuccess());
     } catch (ex) {
-      dispath(authenticateFailed(ex.toString()));
-      throw new Error("faild to sign in try again");
+      dispath(authenticateFailed(ex.response.data));
+      throw new Error(ex.response.data);
     }
   };
 };

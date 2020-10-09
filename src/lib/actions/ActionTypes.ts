@@ -45,6 +45,29 @@ export type UserActionTypes =
 export const FETCH_COURSE_DATA = "FETCH_COURSE_DATA";
 export const EDIT_COURSE_DATA = "EDIT_COURSE_DATA";
 export const CREATE_COURSE_DATA = "CREATE_COURSE_DATA";
+export const FETCH_COURSES = "FETCH_COURSES";
+export const CREATE_COURSE = "CREATE_COURSE";
+export const CREATE_FETCHES_JOIN_SUCCEED = "CREATE_FETCHES_JOIN_SUCCEED";
+export const CREATE_FETCHES_JOIN_FAILD = "CREATE_FETCHES_JOIN_FAILD";
+
+export interface CreateFetchJoinFaild {
+  type: typeof CREATE_FETCHES_JOIN_FAILD;
+  payload: string;
+}
+
+export interface CreateFetchJoinSucced {
+  type: typeof CREATE_FETCHES_JOIN_SUCCEED;
+}
+
+export interface FetchCourses {
+  type: typeof FETCH_COURSES;
+  payload: ICourse[];
+}
+
+export interface CreateCourse {
+  type: typeof CREATE_COURSE;
+  payload: { name: string; id: number };
+}
 
 export interface FetchCourseData {
   type: typeof FETCH_COURSE_DATA;
@@ -56,6 +79,12 @@ export interface EditCourseData {
   payload: ICourse;
 }
 
-export type CourseActionTypes = EditCourseData | FetchCourseData;
+export type CourseActionTypes =
+  | EditCourseData
+  | FetchCourseData
+  | FetchCourses
+  | CreateCourse
+  | CreateFetchJoinFaild
+  | CreateFetchJoinSucced;
 
 export type AppActions = UserActionTypes | CourseActionTypes;

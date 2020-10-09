@@ -17,7 +17,7 @@ export declare module interfaces {
   };
 
   export type MainNavbarTypes = {
-    routes: string[];
+    routes: { name: string; to: string }[];
     isAthunticated?: boolean;
   };
 

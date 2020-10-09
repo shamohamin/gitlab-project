@@ -9,7 +9,7 @@
   padding-top: 20px;
 }
 
-.dashbaord .title {
+.title {
   border-radius: 5px;
   width: 50%;
   max-width: 420px;
@@ -23,7 +23,7 @@
 }
 
 .dashbaord .title:nth-child(n + 2) {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .dashbaord .content {

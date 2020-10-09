@@ -1,13 +1,13 @@
 import React from "react";
 // styles
 import "../../style/dashbaord.css";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 // router
 
 const adminPrivilage: { [key: string]: { [key: string]: string }[] } = {
   privileges: [{ name: "Projects" }, { name: "Users" }, { name: "Homeworks" }],
   duties: [
-    { name: "create course", anchor: "/dashboard/course/create" },
+    { name: "create course", anchor: "/course/create" },
     { name: "define home works" },
   ],
 };
@@ -19,7 +19,6 @@ const divStyle: React.CSSProperties = {
 };
 
 export const AdminPanel: React.FC = () => {
-  const history = useHistory();
   return (
     <div className="dashbaord">
       {Object.keys(adminPrivilage).map((key: string, i: number) => (
@@ -29,16 +28,14 @@ export const AdminPanel: React.FC = () => {
           </div>
           <div className="content" key={key}>
             {adminPrivilage[key].map((duty: { [key: string]: string }) => (
-              <div
-                onClick={() =>
-                  duty["anchor"] ? history.push(duty["anchor"]) : null
-                }
+              <Link
+                to={duty["anchor"] ? duty["anchor"] : "/dashboard"}
                 key={duty.name}
                 style={divStyle}
                 className="item"
               >
                 {duty.name!}
-              </div>
+              </Link>
             ))}
           </div>
         </React.Fragment>

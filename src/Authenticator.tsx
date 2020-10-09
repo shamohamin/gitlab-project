@@ -33,10 +33,9 @@ class Authnticator extends React.Component<
   }
 
   private routeChecker() {
-    console.log("helloooooooooo");
-    const isProtectedRoute = this.props.location.pathname.split("/")[1];
-
-    if (isProtectedRoute.toLowerCase() === "dashboard") {
+    let isProtectedRoute = this.props.location.pathname.split("/")[1];
+    isProtectedRoute = isProtectedRoute.toLowerCase();
+    if (isProtectedRoute === "dashboard" || isProtectedRoute === "course") {
       if (!this.props.isAuhtenticated) {
         this.props.history.push({
           pathname: "/login",
@@ -44,16 +43,6 @@ class Authnticator extends React.Component<
             from: this.props.location.pathname,
           },
         });
-      }
-    }
-
-    if (
-      isProtectedRoute.toLowerCase() === "login" ||
-      isProtectedRoute.toLowerCase() === "sign_up"
-    ) {
-      console.log("hshshshshsh");
-      if (this.props.isAuhtenticated) {
-        this.props.history.push("/home");
       }
     }
   }

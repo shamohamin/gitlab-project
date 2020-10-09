@@ -25,7 +25,7 @@ export declare module interfaces {
   };
 
   export type MainNavbarWrapperTypes = {
-    routes: string[];
+    routes: { name: string; to: string }[];
   };
 
   export type linkDispatchPropsLogin = {

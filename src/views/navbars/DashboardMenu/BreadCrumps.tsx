@@ -7,7 +7,6 @@ export const BreadCrumps: React.FC = () => {
   const location = useLocation();
 
   const routeArray: string[] = location.pathname.split("/").slice(1);
-
   return (
     <div>
       {routeArray.map((route: string, index: number) => (
@@ -16,7 +15,14 @@ export const BreadCrumps: React.FC = () => {
           key={index}
           is_first_anchor={index === 0}
         >
-          <Link to={route}>{route}</Link>
+          <Link
+            to={`/${location.pathname
+              .split("/")
+              .slice(1, index + 2)
+              .join("/")}`}
+          >
+            {route}
+          </Link>
           <span
             className={index !== routeArray.length - 1 ? Shape.rightangle : ""}
           ></span>{" "}

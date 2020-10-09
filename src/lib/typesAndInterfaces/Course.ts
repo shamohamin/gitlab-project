@@ -1,4 +1,7 @@
 export interface ICourse {
-  data: string;
-  mode: "create" | "edit" | undefined;
+  name: string;
+  id?: number;
+  mode?: "create" | "edit" | undefined;
+  data?: string;
+  err?: string;
 }

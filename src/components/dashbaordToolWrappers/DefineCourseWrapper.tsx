@@ -2,23 +2,31 @@ import React from "react";
 import { interfaces } from "../interfaces";
 import { DashbaordForms } from "../../views/dashboard_and_panel/course/DashboardForms";
 import { loginValidator } from "../validators";
+import { RouteComponentProps } from "react-router-dom";
+import { RoutePropsType } from "../../routes";
 
 export class DefineCourseWrapper
-  extends React.Component<{}, interfaces.LoginStateType>
+  extends React.Component<
+    { createCourse: any; err?: string; id?: number } & RouteComponentProps<
+      RoutePropsType
+    >,
+    interfaces.LoginStateType
+  >
   implements interfaces.LoginRegisterComponent {
-  constructor(props: Readonly<{}>) {
+  constructor(
+    props: {
+      createCourse: any;
+      err?: string;
+      id?: number;
+    } & RouteComponentProps<RoutePropsType>
+  ) {
     super(props);
     this.state = {
       data: {
         name: "",
-        password: "",
       },
       rules: {
         name: {
-          isDirty: false,
-          required: true,
-        },
-        password: {
           isDirty: false,
           required: true,
         },
@@ -32,6 +40,7 @@ export class DefineCourseWrapper
     this.setState((state: interfaces.LoginStateType) => {
       state.data[ev.target.name && ev.target.name] = ev.target.value;
       state.rules[ev.target.name && ev.target.name].isDirty = true;
+      state.errors["submit"] = [];
       return {
         ...state,
       };
@@ -42,7 +51,18 @@ export class DefineCourseWrapper
     ev
   ) => {
     ev.preventDefault();
-    console.log("submited!!!!!!!!");
+    try {
+      await this.props.createCourse(this.state.data);
+      this.props.history.push(`/course/${this.props.id}`);
+    } catch (ex) {
+      console.log(this.props.err);
+      this.setState((state: interfaces.LoginStateType) => {
+        state.errors["submit"] = [this.props.err || "some thing went wrong!!"];
+        return {
+          ...state,
+        };
+      });
+    }
   };
 
   static getDerivedStateFromProps(

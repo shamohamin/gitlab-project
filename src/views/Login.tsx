@@ -11,7 +11,7 @@ export const spanStyle: React.CSSProperties = {
   color: "#ff0000",
   display: "inlineBlock",
   width: "100%",
-  paddingBottom: "8px",
+  paddingBottom: "8wpx",
   marginBottom: "3px",
   textAlign:'center'
 };

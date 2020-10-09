@@ -1,6 +1,6 @@
 // redux
 import { ThunkDispatch } from "redux-thunk";
-import { fetchCourse } from "../../lib/actions/courseAction";
+import { fetchCourse, createCourse } from "../../lib/actions/courseAction";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 // interfaces
@@ -14,14 +14,18 @@ export const CourseConnector = (PresentedComponent: any) => {
     state: AppState,
     ownProps: RouteComponentProps<RoutePropsType>
   ) => ({
-    data: state.courseModel.data,
+    name: state.courseModel.name || "",
     mode: ownProps.match.params.mode || "read",
+    courses: state.courseModel.courses || [],
+    err: state.courseModel.err,
+    id: state.courseModel.id || undefined,
   });
 
   const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
   ) => ({
-    submitCourse: (data: ICourse) => dispatch(fetchCourse(data)),
+    fetchCourse: (data?: ICourse) => dispatch(fetchCourse(data)),
+    createCourse: (data?: any) => dispatch(createCourse(data)),
   });
 
   return withRouter(

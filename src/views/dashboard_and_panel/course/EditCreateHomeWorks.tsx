@@ -205,10 +205,10 @@ export class EditCreateCourse extends React.Component<
     const html = convertor(rowFormat);
     console.log(html)
     console.log(rowFormat)
-    this.props.submitCourse({
-      data: html,
-      mode: this.props.match.params.mode,
-    });
+    // this.props.submitCourse({
+    //   data: html,
+    //   mode: this.props.match.params.mode || 'create',
+    // });
     console.log(this.props.location.pathname);
     this.props.history.push(
       `/${this.props.location.pathname

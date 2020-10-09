@@ -7,19 +7,21 @@ import { Shape } from "../utility/Shapes";
 import { useEffect } from "react";
 
 export const Menu: React.FC<
-  interfaces.MainNavbarTypes & { open: boolean } & { setOpen: any }
-> = ({ routes, open, setOpen }) => {
+  interfaces.MainNavbarTypes & { section: string } & { open: boolean } & {
+    setOpen: any;
+  }
+> = ({ routes, open, setOpen, section }) => {
   const location = useLocation();
-  const routeRendersProps = routes.map((route: string) => ({
-    path: `/dashboard/${route.toLowerCase()}`,
+  const routeRendersProps = routes.map((route: {name: string, to: string}) => ({
+    path: `/${route.to.toLowerCase()}`,
     spanClassname:
       Shape[
-        (route
+        (route.name
           .toLowerCase()
           .split(" ")
           .join("") as unknown) as keyof typeof Shape
       ],
-    name: route.toLowerCase(),
+    name: route.name.toLowerCase(),
   }));
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export const Menu: React.FC<
   return (
     <div
       id="sticky"
-      style={{ height: "100vh", overflowY: "scroll", minWidth:'250px' }}
+      style={{ height: "100vh", overflowY: "scroll", minWidth: "250px" }}
     >
       <StyledMenu open={open}>
         {routeRendersProps.map(({ path, spanClassname, name }) =>

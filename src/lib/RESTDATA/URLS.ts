@@ -6,5 +6,5 @@ export const URLS = {
   POSTUSER: `${PROTOCOL}://${BASE_URL}/signup`,
   LOGINUSER: `${PROTOCOL}://${BASE_URL}/login`,
   RETRIVEUSER: `${PROTOCOL}://${BASE_URL}/auth`,
-  TEST: "http://localhost:5000/api/",
+  GETCLASSROOMS: `${PROTOCOL}://${BASE_URL}/classrooms`,
 };

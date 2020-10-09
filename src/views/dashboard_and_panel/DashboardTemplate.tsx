@@ -8,10 +8,9 @@ import "../../style/sideNavabarTemplate.css";
 // interfaces
 import { interfaces } from "../interfaces";
 
-export const DashboardTemplate: React.FC<interfaces.MainNavbarTypes> = ({
-  children,
-  routes,
-}) => {
+export const DashboardTemplate: React.FC<
+  interfaces.MainNavbarTypes & { section: string }
+> = ({ children, routes, section }) => {
   const [open, setOpen] = useState<boolean>(false);
   const node = useRef() as React.RefObject<HTMLDivElement>;
 
@@ -41,7 +40,12 @@ export const DashboardTemplate: React.FC<interfaces.MainNavbarTypes> = ({
       <div className="container">
         <div ref={(node as unknown) as React.RefObject<HTMLDivElement>}>
           <FocusLock disabled={!open}>
-            <Menu setOpen={setOpen} open={open} routes={routes} />
+            <Menu
+              setOpen={setOpen}
+              open={open}
+              routes={routes}
+              section={section}
+            />
           </FocusLock>
         </div>
         <div>{children}</div>

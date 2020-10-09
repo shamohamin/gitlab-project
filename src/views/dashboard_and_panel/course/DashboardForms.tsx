@@ -51,7 +51,7 @@ export const DashbaordForms: React.FC<interfaces.LoginPropsType> = ({
     });
   return (
     <div className="dashboard-forms">
-      <div className="title">
+      <div className="title1">
         <h2>
           Create Class(Course) <span className="fa fa-plus"></span>{" "}
         </h2>
@@ -60,6 +60,18 @@ export const DashbaordForms: React.FC<interfaces.LoginPropsType> = ({
       <div className="content">
         <div>
           <form className="form" method="POST" onSubmit={onSubmit}>
+            {errors["submit"] && errors['submit'].length ? (
+              <div
+                style={{
+                  backgroundColor: "rgba(200, 0, 0, 0.5)",
+                  color: "white",
+                  borderRadius: "2px",
+                  padding: "4px",
+                }}
+              >
+                {errors["submit"] ? errors["submit"] : null}
+              </div>
+            ) : null}
             <div>
               {" "}
               <h3 className="form-title"> Class Information </h3>
@@ -81,12 +93,12 @@ export const DashbaordForms: React.FC<interfaces.LoginPropsType> = ({
                 <p>Every class must have name for class.</p>
               </div>
             </li>
-            <li>
+            {/* <li>
               <h4>Password</h4>
               <div>
                 <p>Every class must have password for student to attend to.</p>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

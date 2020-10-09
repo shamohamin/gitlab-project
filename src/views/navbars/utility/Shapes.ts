@@ -4,4 +4,5 @@ export enum Shape {
   activehomeworks = "fa fa-tasks fa-lg",
   rightangle = "fa fa-angle-right fa-small",
   admin = "fa fa-cog",
+  joiningcourse = "fa fa-book",
 }

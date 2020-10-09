@@ -35,17 +35,17 @@ const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
     $(".navbar-links").css({ display: "none" });
   }
   const authenticatedRoutes = isAthunticated
-    ? routes.filter((item: string) =>
-        item.toLowerCase() === "dashboard"
+    ? routes.filter((item: { name: string; to: string }) =>
+        item.name.toLowerCase() === "dashboard"
           ? item
-          : item.toLowerCase() === "logout"
+          : item.name.toLowerCase() === "logout"
           ? item
           : ""
       )
-    : routes.filter((item: string) =>
-        item.toLowerCase() === "dashboard"
+    : routes.filter((item: { name: string; to: string }) =>
+        item.name.toLowerCase() === "dashboard"
           ? ""
-          : item.toLowerCase() === "logout"
+          : item.name.toLowerCase() === "logout"
           ? ""
           : item
       );
@@ -59,10 +59,10 @@ const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
         ></span>
         <div className={`navbar-brand`}>KNTU</div>
         <div className={`navbar-links`}>
-          {authenticatedRoutes.map((route: string) =>
+          {authenticatedRoutes.map((route: { name: string; to: string }) =>
             linkGenerator(
-              `/${route.toLowerCase()}`,
-              route.toLowerCase(),
+              `/${route.to.toLowerCase()}`,
+              route.name.toLowerCase(),
               location,
               "nav-item"
             )
