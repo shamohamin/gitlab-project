@@ -50,6 +50,7 @@
   padding-left: 20px;
   padding-bottom: 4px;
   font-size: 2rem;
+  cursor: pointer;
 }
 
 .main-navbar .navbar .navbar-links .nav-item {
