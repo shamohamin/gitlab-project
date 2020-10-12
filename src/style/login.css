@@ -9,8 +9,9 @@
   justify-content: center;
   flex-wrap: wrap;
   padding: 15px;
-  background-color: #e6e6e6;
-  background: -webkit-linear-gradient(bottom, #0250c5, #d4418d);
+  background-color: #eee;
+  /* background-color: #e6e6e6; */
+  /* background: -webkit-linear-gradient(bottom, #0250c5, #d4418d); */
   position: relative;
   z-index: 1;
 }
