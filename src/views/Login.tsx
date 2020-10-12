@@ -13,7 +13,7 @@ export const spanStyle: React.CSSProperties = {
   width: "100%",
   paddingBottom: "8wpx",
   marginBottom: "3px",
-  textAlign:'center'
+  textAlign: "center",
 };
 
 export const divStyle: React.CSSProperties = {
@@ -41,9 +41,10 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
   errors,
   isDirty,
   name,
+  remeberMe,
 }) => {
   const history = useHistory();
-
+  // const [remeber, setRemeber] = useState<boolean>(false);
   const inputs: interfaces.InputProps[] = Object.keys(values).map(
     (key: string) => {
       return {
@@ -108,13 +109,25 @@ export const Login: React.FunctionComponent<interfaces.LoginPropsType> = ({
               : null
             : null}
           {inputGenerator(inputs)}
+          {name!.toLowerCase() === "login" ? (
+            <div className="remember-me">
+              <input
+                className="rem-input"
+                type="checkbox"
+                name="remeber-me"
+                value={"remeber"}
+                checked={remeberMe}
+                onChange={onChangeSelect}
+              />
+              <label>Remeber Me</label>
+            </div>
+          ) : null}
           <div className="form-btn">
             {" "}
             <button type="submit"> {name!.toUpperCase()} </button>{" "}
           </div>
-
           <div className="text-center">
-            <span> Or login with </span>
+            {/* <span> Or login with </span> */}
           </div>
           {/* <div className="google">
             <GoogleLogin clientId="" buttonText="Google" />

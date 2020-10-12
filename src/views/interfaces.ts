@@ -4,7 +4,7 @@ import { EditorState as ES } from "draft-js";
 export declare module interfaces {
   export type LoginPropsType = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onChangeSelect?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    onChangeSelect?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     values: {
       [key: string]: string;
     };
@@ -14,6 +14,7 @@ export declare module interfaces {
       [key: string]: boolean | undefined;
     };
     name?: string;
+    remeberMe?: boolean;
   };
 
   export type MainNavbarTypes = {

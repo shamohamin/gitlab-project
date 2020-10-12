@@ -19,7 +19,7 @@ import { RoutePropsType } from "../routes";
 class LoginWrapper
   extends React.Component<
     interfaces.linkDispatchPropsLogin & RouteComponentProps<RoutePropsType>,
-    interfaces.LoginStateType
+    interfaces.LoginStateType & { remeberMe: boolean }
   >
   implements interfaces.LoginRegisterComponent {
   constructor(
@@ -28,6 +28,7 @@ class LoginWrapper
   ) {
     super(props);
     this.state = {
+      remeberMe: false,
       data: {
         username: "",
         password: "",
@@ -55,11 +56,29 @@ class LoginWrapper
     this.setState((state) => {
       state.data[event.target.name && event.target.name] = event.target.value;
       state.rules[event.target.name && event.target.name].isDirty = true;
-      state.errors['login'] = []
+      state.errors["login"] = [];
       return {
         ...state,
       };
     });
+  };
+
+  componentDidMount() {
+    if (localStorage.getItem("username")) {
+      this.setState({
+        data: {
+          ...this.state.data,
+          username: localStorage.getItem("username")! as string,
+        },
+        remeberMe: true,
+      });
+    }
+  }
+
+  onChangeSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event) {
+      this.setState({ remeberMe: event!.target.checked });
+    }
   };
 
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => Promise<void> = async (
@@ -68,6 +87,9 @@ class LoginWrapper
     ev.preventDefault();
     try {
       if (this.validate()) {
+        if (this.state.remeberMe) {
+          localStorage.setItem("username", this.state.data.username);
+        }
         await this.props.fetchUser({ ...this.state.data }, URLS.LOGINUSER);
         if (this.props.location.state) {
           if ("from" in this.props.location.state) {
@@ -131,15 +153,17 @@ class LoginWrapper
     Object.keys(this.state.rules).forEach((key: string) => {
       dirty[key] = this.state.rules[key].isDirty;
     });
-    console.log(this.state.errors);
+
     return (
       <Login
+        onChangeSelect={this.onChangeSelect}
         onChange={this.onChange}
         values={this.state.data}
         onSubmit={this.onSubmit}
         errors={this.state.errors}
         isDirty={dirty}
         name={"Login"}
+        remeberMe={this.state.remeberMe}
       />
     );
   }
