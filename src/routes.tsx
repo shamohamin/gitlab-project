@@ -31,9 +31,10 @@ const CourseLazy = React.lazy(() =>
 export const routes = [
   { name: "Home", to: "home" },
   { name: "Login", to: "login" },
-  { name: "sign_up", to: "sign_up" },
+  { name: "Sign up", to: "sign_up" },
   { name: "Dashboard", to: "dashboard" },
-  { name: "logout", to: "logout" },
+  { name: "Logout", to: "logout" },
+  { name: "Gitlab", to: 'http://git.ce.kntu.ac.ir'}
 ];
 export const dashboardroutes = [
   {

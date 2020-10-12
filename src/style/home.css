@@ -1,27 +1,35 @@
 .home {
   display: flex;
-  position: absolute;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   flex-direction: column;
   flex-wrap: wrap;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(0%, -5%);
   box-sizing: border-box;
+  margin-left: 50px;
   z-index: 999;
+  float: right;
+}
+
+.contrainer {
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .backimage {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  display: block;
   background-image: url("../images/K._N._Toosi_University_of_Technology.png");
-  filter: opacity(65%);
-  -webkit-filter: opacity(65%);
-  background-color: #eee;
-  background-size: 50% 100%;
-  width: 100%;
+  /* filter: opacity(65%); */
+  /* -webkit-filter: opacity(65%); */
+  /* background-color: #eee; */
+  /* background-size: 50% 100%; */
+  background-size: cover;
+  width: 45%;
   background-repeat: no-repeat;
   min-height: 90vh;
   background-clip: border-box;
@@ -45,9 +53,17 @@
   -webkit-text-fill-color: transparent;
 }
 
+@media (max-width: 1000px) {
+    .backimage {
+        background-size: 100% 100%;
+    }
+}
 @media (max-width: 400px) {
   .backimage {
     background-size: 100% 100%;
+  }
+  .home {
+    margin: 0px;
   }
   .logo {
     font-size: 100px;
@@ -56,7 +72,13 @@
 
 @media (min-width: 1400px) {
   .backimage {
-    background-size: 40% 100%;
+    background-size: 100% 100%;
+  }
+}
+
+@media (min-width: 1800px) {
+  .backimage {
+    background-size: 70% 100%;
   }
 }
 
@@ -69,8 +91,17 @@
 
 .home .redirect-btn {
   width: 150px;
-  height: 40px;
-  background-color: #0275d8;
+  height: 50px;
+  /* background-color: #0275d8; */
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 98%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,11 +113,11 @@
 }
 
 .home .redirect-btn:last-child {
-    margin-left: 12px;
+  margin-left: 12px;
 }
 
 .home .redirect-btn:first-child {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
 .home * {

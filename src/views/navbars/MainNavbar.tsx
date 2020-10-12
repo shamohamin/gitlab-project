@@ -40,7 +40,8 @@ const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
         item.name.toLowerCase() === "dashboard"
           ? item
           : item.name.toLowerCase() === "logout" ||
-            item.name.toLowerCase() === "home"
+            item.name.toLowerCase() === "home" ||
+            item.name.toLowerCase() === "gitlab"
           ? item
           : ""
       )
@@ -66,7 +67,7 @@ const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
           {authenticatedRoutes.map((route: { name: string; to: string }) =>
             linkGenerator(
               `/${route.to.toLowerCase()}`,
-              route.name.toLowerCase(),
+              route.name,
               location,
               "nav-item"
             )

@@ -11,7 +11,7 @@ export const Home: React.FC<{}> = () => {
   }));
 
   return (
-    <>
+    <div className="contrainer">
       <div className="backimage"></div>
       <div className="home">
         <div>
@@ -47,6 +47,6 @@ export const Home: React.FC<{}> = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
