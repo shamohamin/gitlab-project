@@ -1,0 +1,95 @@
+.home {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  z-index: 999;
+}
+
+.backimage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-image: url("../images/K._N._Toosi_University_of_Technology.png");
+  filter: opacity(65%);
+  -webkit-filter: opacity(65%);
+  background-color: #eee;
+  background-size: 50% 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  min-height: 90vh;
+  background-clip: border-box;
+  padding: 0px;
+  margin: 0px;
+  background-position: 50%;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 120px;
+  line-height: 1.4;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 98%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 400px) {
+  .backimage {
+    background-size: 100% 100%;
+  }
+  .logo {
+    font-size: 100px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .backimage {
+    background-size: 40% 100%;
+  }
+}
+
+.home .btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home .redirect-btn {
+  width: 150px;
+  height: 40px;
+  background-color: #0275d8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0px 0px 10px -10px white;
+  margin-right: 3px;
+}
+
+.home .redirect-btn:last-child {
+    margin-left: 12px;
+}
+
+.home .redirect-btn:first-child {
+    margin-right: 12px;
+}
+
+.home * {
+  opacity: 1;
+  color: black;
+}
