@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 //interfaces
 import { interfaces } from "../interfaces";
 // styles
@@ -17,6 +17,7 @@ const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
   isAthunticated,
 }) => {
   const location = useLocation();
+  const history = useHistory();
   const [width, setWidth] = useState<number>(window && window.innerWidth);
 
   useEffect(() => {
@@ -38,7 +39,8 @@ const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
     ? routes.filter((item: { name: string; to: string }) =>
         item.name.toLowerCase() === "dashboard"
           ? item
-          : item.name.toLowerCase() === "logout"
+          : item.name.toLowerCase() === "logout" ||
+            item.name.toLowerCase() === "home"
           ? item
           : ""
       )
@@ -57,7 +59,9 @@ const MainNavbar: React.FC<interfaces.MainNavbarTypes> = ({
           className={"slide-button fa fa-bars fa-1x"}
           onClick={() => $(".navbar-links").not(".nav-item").toggle("slow")}
         ></span>
-        <div className={`navbar-brand`}>KNTU</div>
+        <div onClick={() => history.push("/home")} className={`navbar-brand`}>
+          KNTU
+        </div>
         <div className={`navbar-links`}>
           {authenticatedRoutes.map((route: { name: string; to: string }) =>
             linkGenerator(
