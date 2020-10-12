@@ -14,6 +14,7 @@ import { NotFound } from "./views/404";
 import Authenticator from "./Authenticator";
 import { Logout } from "./components/Logout";
 import { Spinner } from "./views/spinner";
+import { Home } from "./views/Home";
 // lazy components
 const DashboardLazy = React.lazy(() =>
   import("./components/DashboardWrapper").then(({ DashboardWrapper }) => ({
@@ -28,7 +29,7 @@ const CourseLazy = React.lazy(() =>
 );
 // routes array
 export const routes = [
-  { name: "Home", to: "name" },
+  { name: "Home", to: "home" },
   { name: "Login", to: "login" },
   { name: "sign_up", to: "sign_up" },
   { name: "Dashboard", to: "dashboard" },
@@ -94,15 +95,7 @@ export const Routes: React.FC<{ isAuth: boolean; logout: () => void }> = ({
                   !isAuth ? Wrapper(LoginWrapper) : <Redirect to="/" />
                 }
               />
-              <Route
-                path="/home"
-                component={() => (
-                  <Template>
-                    {" "}
-                    <div>home</div>{" "}
-                  </Template>
-                )}
-              />
+              <Route path="/home" component={() => Wrapper(Home)} />
               <Route
                 path="/sign_up"
                 component={() =>
