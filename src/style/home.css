@@ -12,6 +12,7 @@
 }
 
 .contrainer {
+  height: 98vh;
   background-color: #eee;
   display: flex;
   justify-content: center;
@@ -54,13 +55,18 @@
 }
 
 @media (max-width: 1000px) {
-    .backimage {
-        background-size: 100% 100%;
-    }
+  .backimage {
+    background-size: 70% 100%;
+    width: 100%;
+  }
+  .contrainer {
+    height: fit-content;
+  }
 }
+
 @media (max-width: 400px) {
   .backimage {
-    background-size: 100% 100%;
+    background-size: 100% 70%;
   }
   .home {
     margin: 0px;
@@ -78,7 +84,7 @@
 
 @media (min-width: 1800px) {
   .backimage {
-    background-size: 70% 100%;
+    background-size: 100% 100%;
   }
 }
 

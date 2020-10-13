@@ -9,6 +9,10 @@
   padding-top: 20px;
 }
 
+.dashbaord::-webkit-scrollbar {
+  display: none;
+}
+
 .title {
   border-radius: 5px;
   width: 50%;
@@ -46,9 +50,9 @@
   cursor: pointer;
   margin-right: 15px;
   margin-top: 25px;
-  height: 425px;
+  height: 465px;
   /* background-color: rgba(0, 0, 0, 0.7); */
-  background-color:#1a2228;
+  background-color: #1a2228;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;

@@ -24,7 +24,7 @@ export const Profile: React.FC = () => {
               <h1> {state.name} </h1>{" "}
             </div>
             <div> {state.email} </div>
-            <div>Number of Courses: 3</div>
+            <div>Number of Courses: Example</div>
             <div className="line"></div>
           </div>
         </div>

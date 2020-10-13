@@ -13,10 +13,10 @@ const SpanStyle: React.CSSProperties = {
 export const Dashbaord: React.FC = () => {
   const deafultState: interfaces.CourseType[] = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 1; i++) {
     deafultState.push({
-      name: "Advance programing",
-      instructor: "Dr. Esnashery",
+      name: "Example",
+      instructor: "Example",
       startDate: "2020/09/03",
       numberOfHomeWorks: Math.floor(Math.random() * 4) + 1,
     });

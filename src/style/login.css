@@ -222,14 +222,14 @@
 }
 
 .login-component .remember-me .rem-input:checked::after {
-  content: '';
+  content: "";
   background-color: #0250c5;
   width: 15px;
   height: 15px;
   border-radius: 50%;
   position: absolute;
-  left: 5.9px;
-  top: 2.5px;
+  left: 5.4px;
+  top: 3.9px;
 }
 
 .login-component .remember-me label {
